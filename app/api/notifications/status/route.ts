@@ -34,12 +34,19 @@ export async function GET(request: NextRequest) {
     // Get default recipients
     const defaultRecipients = process.env.NOTIFY_DEFAULT_RECIPIENTS?.split(',').map(e => e.trim()) || []
 
+    // Debug info (masked for security)
+    const smtpUser = process.env.SMTP_USER || ''
+    const smtpPass = process.env.SMTP_PASS || ''
+    
     return NextResponse.json({
       success: true,
       data: {
         smtpConfigured,
         smtpHost: process.env.SMTP_HOST || null,
-        smtpUser: process.env.SMTP_USER ? '***configured***' : null,
+        smtpPort: process.env.SMTP_PORT || '587',
+        smtpUser: smtpUser ? `${smtpUser.substring(0, 3)}***@${smtpUser.split('@')[1] || '???'}` : null,
+        smtpPassLength: smtpPass.length,
+        smtpPassPreview: smtpPass ? `${smtpPass.substring(0, 2)}***${smtpPass.substring(smtpPass.length - 2)}` : null,
         smtpFrom: process.env.SMTP_FROM || null,
         defaultRecipients,
         activeRulesCount: rulesCount,
