@@ -1,8 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Container, Typography, Paper, Box, Button, Alert } from '@mui/material'
-import Grid from '@mui/material/Grid2'
+import { Container, Grid, Typography, Paper, Box, Button, Alert } from '@mui/material'
 import { DashboardCards } from '@/components/DashboardCards'
 import { ItemTable } from '@/components/ItemTable'
 import { RecentActivity } from '@/components/RecentActivity'

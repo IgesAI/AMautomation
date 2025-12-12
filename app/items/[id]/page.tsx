@@ -8,6 +8,7 @@ import {
   Paper,
   Tabs,
   Tab,
+  Grid,
   Button,
   Chip,
   Table,
@@ -18,7 +19,6 @@ import {
   TableRow,
   Alert,
 } from '@mui/material'
-import Grid from '@mui/material/Grid2'
 import { Add as AddIcon, Edit as EditIcon } from '@mui/icons-material'
 import { useParams, useRouter } from 'next/navigation'
 import { format } from 'date-fns'

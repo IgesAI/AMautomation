@@ -1,6 +1,5 @@
 import React from 'react'
-import { Paper, Typography, Box } from '@mui/material'
-import Grid from '@mui/material/Grid2'
+import { Grid, Paper, Typography, Box } from '@mui/material'
 
 interface DashboardSummary {
   totalItems: number
