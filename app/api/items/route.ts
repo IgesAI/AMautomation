@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getItemsWithStatus, ItemStatus } from '@/lib/item-utils'
+import { ItemStatus } from '@prisma/client'
+import { getItemsWithStatus } from '@/lib/item-utils'
 import { requireAdmin } from '@/lib/auth'
 
 export async function GET(request: NextRequest) {

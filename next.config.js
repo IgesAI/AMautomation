@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // Next.js 16+ has App Router enabled by default
 }
 
 module.exports = nextConfig
