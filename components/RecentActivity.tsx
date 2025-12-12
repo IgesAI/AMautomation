@@ -70,13 +70,13 @@ export function RecentActivity({ transactions }: RecentActivityProps) {
         variant="h5"
         sx={{
           color: '#00ffff',
-          textShadow: '0 0 8px #00ffff',
+          textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff',
           fontFamily: '"VT323", monospace',
           mb: 3,
           textAlign: 'center',
         }}
       >
-        RECENT ACTIVITY
+        {'>'} Recent Activity
       </Typography>
 
       {transactions.length === 0 ? (

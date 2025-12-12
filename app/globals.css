@@ -2,15 +2,16 @@
 
 :root {
   --pip-green: #00ff00;
-  --pip-bg: #000000;
+  --pip-bg: #0a0a0a;
   --pip-cyan: #00ffff;
   --pip-magenta: #ff00ff;
   --pip-orange: #ffaa00;
   --pip-red: #ff4444;
-  --terminal-bg: #000011;
-  --terminal-border: #00cccc;
-  --glow-cyan: rgba(0, 255, 255, 0.5);
+  --terminal-bg: #0a0a0a;
+  --terminal-border: #00ffff;
+  --glow-cyan: rgba(0, 255, 255, 0.6);
   --glow-magenta: rgba(255, 0, 255, 0.5);
+  --card-bg: rgba(10, 10, 10, 0.95);
 }
 
 * {
@@ -77,6 +78,32 @@ body {
   animation: flicker 4s infinite;
 }
 
+/* Blinking Cursor Animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.terminal-cursor::after {
+  content: '_';
+  animation: blink 1s infinite;
+  color: var(--pip-cyan);
+  text-shadow: 0 0 10px var(--pip-cyan);
+}
+
+/* Terminal Heading with > prefix */
+.terminal-heading {
+  font-family: 'VT323', monospace;
+  color: var(--pip-cyan);
+  text-shadow: 0 0 10px var(--pip-cyan), 0 0 20px var(--pip-cyan);
+  letter-spacing: 0.1em;
+}
+
+.terminal-heading::before {
+  content: '> ';
+  color: var(--pip-cyan);
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
@@ -120,13 +147,32 @@ body {
 }
 
 .terminal-card {
-  background: linear-gradient(135deg, rgba(0, 17, 34, 0.9), rgba(0, 34, 51, 0.9));
+  background: var(--card-bg);
   border: 1px solid var(--terminal-border);
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow:
-    0 0 20px var(--glow-cyan),
-    inset 0 0 20px rgba(0, 255, 255, 0.1);
+    0 0 15px var(--glow-cyan),
+    0 0 30px rgba(0, 255, 255, 0.2),
+    inset 0 0 30px rgba(0, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.terminal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 255, 0.03) 0%,
+    transparent 50%,
+    rgba(0, 255, 255, 0.02) 100%
+  );
+  pointer-events: none;
 }
 
 .terminal-button {

@@ -166,18 +166,18 @@ export default function Dashboard() {
           variant="h3"
           sx={{
             color: '#00ffff',
-            textShadow: '0 0 15px #00ffff',
+            textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff',
             fontFamily: '"VT323", monospace',
             mb: 2,
             letterSpacing: '0.1em',
           }}
         >
-          AM CONSUMABLES INVENTORY SYSTEM
+          {'>'} AM Consumables Inventory<span style={{ animation: 'blink 1s infinite' }}>_</span>
         </Typography>
         <Typography
           variant="h6"
           sx={{
-            color: '#cccccc',
+            color: '#b0b0b0',
             fontFamily: '"Share Tech Mono", monospace',
             letterSpacing: '0.05em',
           }}
@@ -208,11 +208,11 @@ export default function Dashboard() {
                 variant="h5"
                 sx={{
                   color: '#ffaa00',
-                  textShadow: '0 0 10px #ffaa00',
+                  textShadow: '0 0 15px #ffaa00, 0 0 30px #ffaa00',
                   fontFamily: '"VT323", monospace',
                 }}
               >
-                CRITICAL ITEMS ALERT
+                {'>'} Critical Items Alert
               </Typography>
               <Button
                 onClick={() => router.push('/items')}
@@ -266,12 +266,12 @@ export default function Dashboard() {
           variant="h6"
           sx={{
             color: '#00ffff',
-            textShadow: '0 0 8px #00ffff',
-            fontFamily: '"Share Tech Mono", monospace',
+            textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff',
+            fontFamily: '"VT323", monospace',
             mb: 2,
           }}
         >
-          QUICK ACTIONS
+          {'>'} Quick Actions
         </Typography>
         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Button

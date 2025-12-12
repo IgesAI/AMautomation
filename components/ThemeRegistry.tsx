@@ -19,12 +19,12 @@ const theme = createTheme({
       dark: '#cc00cc',
     },
     background: {
-      default: '#000000',
-      paper: '#001122',
+      default: '#0a0a0a',
+      paper: '#0a0a0a',
     },
     text: {
       primary: '#ffffff',
-      secondary: '#cccccc',
+      secondary: '#b0b0b0',
     },
     error: {
       main: '#ff4444',
@@ -118,11 +118,12 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: 'none',
+          backgroundColor: 'rgba(10, 10, 10, 0.95)',
           border: '1px solid #00ffff',
-          borderRadius: '4px',
-          boxShadow: '0 0 20px rgba(0, 255, 255, 0.1)',
+          borderRadius: '8px',
+          boxShadow: '0 0 15px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.1)',
           '&:hover': {
-            boxShadow: '0 0 30px rgba(0, 255, 255, 0.2)',
+            boxShadow: '0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2)',
             borderColor: '#33ffff',
           },
         },
