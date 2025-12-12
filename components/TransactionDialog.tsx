@@ -115,8 +115,8 @@ export function TransactionDialog({
     >
       <DialogTitle
         sx={{
-          color: '#00e5ff',
-          textShadow: '0 0 8px #00e5ff',
+          color: '#0099dd',
+          textShadow: '0 0 8px #0099dd',
           fontFamily: '"VT323", monospace',
           fontSize: '1.5rem',
           textAlign: 'center',
@@ -161,7 +161,7 @@ export function TransactionDialog({
             <InputLabel
               sx={{
                 color: '#cccccc',
-                '&.Mui-focused': { color: '#00e5ff' },
+                '&.Mui-focused': { color: '#0099dd' },
               }}
             >
               Transaction Type
@@ -179,10 +179,10 @@ export function TransactionDialog({
                   borderColor: '#00cccc',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#00e5ff',
+                  borderColor: '#0099dd',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#00e5ff',
+                  borderColor: '#0099dd',
                   boxShadow: '0 0 8px rgba(0, 255, 255, 0.3)',
                 },
               }}
@@ -213,7 +213,7 @@ export function TransactionDialog({
             <InputLabel
               sx={{
                 color: '#cccccc',
-                '&.Mui-focused': { color: '#00e5ff' },
+                '&.Mui-focused': { color: '#0099dd' },
               }}
             >
               Machine/Area

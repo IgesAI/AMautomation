@@ -3,13 +3,16 @@
 :root {
   --pip-green: #00ff00;
   --pip-bg: #0a0a0a;
-  --pip-cyan: #00e5ff;
+  --pip-blue: #0099dd;
+  --pip-blue-light: #33bbff;
+  --pip-blue-dark: #0077aa;
   --pip-magenta: #ff00ff;
   --pip-orange: #ffaa00;
   --pip-red: #ff4444;
   --terminal-bg: #0a0a0a;
-  --terminal-border: #00e5ff;
-  --glow-cyan: rgba(0, 229, 255, 0.5);
+  --terminal-border: #0099dd;
+  --glow-blue: rgba(0, 153, 221, 0.5);
+  --glow-blue-light: rgba(0, 153, 221, 0.3);
   --glow-magenta: rgba(255, 0, 255, 0.5);
   --card-bg: rgba(10, 10, 10, 0.95);
 }
@@ -42,8 +45,8 @@ body::before {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 255, 255, 0.03) 2px,
-    rgba(0, 255, 255, 0.03) 4px
+    rgba(0, 153, 221, 0.02) 2px,
+    rgba(0, 153, 221, 0.02) 4px
   );
   pointer-events: none;
   z-index: 1000;
@@ -87,21 +90,21 @@ body {
 .terminal-cursor::after {
   content: '_';
   animation: blink 1s infinite;
-  color: var(--pip-cyan);
-  text-shadow: 0 0 10px var(--pip-cyan);
+  color: var(--pip-blue);
+  text-shadow: 0 0 10px var(--pip-blue);
 }
 
 /* Terminal Heading with > prefix */
 .terminal-heading {
   font-family: 'VT323', monospace;
-  color: var(--pip-cyan);
-  text-shadow: 0 0 10px var(--pip-cyan), 0 0 20px var(--pip-cyan);
+  color: var(--pip-blue);
+  text-shadow: 0 0 10px var(--pip-blue), 0 0 20px var(--pip-blue);
   letter-spacing: 0.1em;
 }
 
 .terminal-heading::before {
   content: '> ';
-  color: var(--pip-cyan);
+  color: var(--pip-blue);
 }
 
 /* Custom Scrollbars */
@@ -116,14 +119,14 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--pip-cyan);
+  background: var(--pip-blue);
   border-radius: 4px;
-  box-shadow: 0 0 5px var(--glow-cyan);
+  box-shadow: 0 0 5px var(--glow-blue);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6effff;
-  box-shadow: 0 0 10px var(--glow-cyan);
+  background: var(--pip-blue-light);
+  box-shadow: 0 0 10px var(--glow-blue);
 }
 
 ::-webkit-scrollbar-corner {
@@ -132,18 +135,18 @@ body {
 
 /* Text Selection Glow */
 ::selection {
-  background: rgba(0, 255, 255, 0.2);
-  text-shadow: 0 0 8px var(--pip-cyan);
+  background: rgba(0, 153, 221, 0.2);
+  text-shadow: 0 0 8px var(--pip-blue);
 }
 
 /* Terminal Glow Effects */
 .terminal-glow {
-  text-shadow: 0 0 10px var(--pip-cyan);
+  text-shadow: 0 0 10px var(--pip-blue);
 }
 
 .terminal-border {
   border: 1px solid var(--terminal-border);
-  box-shadow: 0 0 10px var(--glow-cyan);
+  box-shadow: 0 0 10px var(--glow-blue);
 }
 
 .terminal-card {
@@ -151,9 +154,9 @@ body {
   border: 1px solid var(--terminal-border);
   border-radius: 8px;
   box-shadow:
-    0 0 15px var(--glow-cyan),
-    0 0 30px rgba(0, 255, 255, 0.2),
-    inset 0 0 30px rgba(0, 255, 255, 0.05);
+    0 0 15px var(--glow-blue),
+    0 0 30px var(--glow-blue-light),
+    inset 0 0 30px rgba(0, 153, 221, 0.03);
   backdrop-filter: blur(10px);
   position: relative;
 }
@@ -168,39 +171,39 @@ body {
   border-radius: 8px;
   background: linear-gradient(
     135deg,
-    rgba(0, 255, 255, 0.03) 0%,
+    rgba(0, 153, 221, 0.02) 0%,
     transparent 50%,
-    rgba(0, 255, 255, 0.02) 100%
+    rgba(0, 153, 221, 0.01) 100%
   );
   pointer-events: none;
 }
 
 .terminal-button {
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 204, 204, 0.1));
+  background: linear-gradient(135deg, rgba(0, 153, 221, 0.1), rgba(0, 119, 170, 0.1));
   border: 1px solid var(--terminal-border);
   border-radius: 2px;
-  box-shadow: 0 0 10px var(--glow-cyan);
+  box-shadow: 0 0 10px var(--glow-blue);
   transition: all 0.3s ease;
 }
 
 .terminal-button:hover {
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(51, 255, 255, 0.2));
-  box-shadow: 0 0 20px var(--glow-cyan);
+  background: linear-gradient(135deg, rgba(0, 153, 221, 0.2), rgba(51, 187, 255, 0.2));
+  box-shadow: 0 0 20px var(--glow-blue);
   transform: translateY(-1px);
 }
 
 .terminal-input {
-  background: rgba(0, 17, 34, 0.8);
+  background: rgba(10, 10, 10, 0.8);
   border: 1px solid var(--terminal-border);
   border-radius: 2px;
-  box-shadow: 0 0 8px var(--glow-cyan);
+  box-shadow: 0 0 8px var(--glow-blue-light);
   color: #ffffff;
   transition: all 0.3s ease;
 }
 
 .terminal-input:focus {
-  border-color: var(--pip-cyan);
-  box-shadow: 0 0 15px var(--glow-cyan);
+  border-color: var(--pip-blue);
+  box-shadow: 0 0 15px var(--glow-blue);
   outline: none;
 }
 
@@ -229,21 +232,21 @@ body {
 .MuiDataGrid-root {
   border: 1px solid var(--terminal-border);
   border-radius: 4px;
-  box-shadow: 0 0 15px var(--glow-cyan);
+  box-shadow: 0 0 15px var(--glow-blue);
 }
 
 .MuiDataGrid-columnHeaders {
-  background: linear-gradient(135deg, rgba(0, 17, 34, 0.9), rgba(0, 34, 51, 0.9));
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(10, 20, 30, 0.9));
   border-bottom: 1px solid var(--terminal-border);
 }
 
 .MuiDataGrid-row:hover {
-  background: rgba(0, 255, 255, 0.05);
-  box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1);
+  background: rgba(0, 153, 221, 0.05);
+  box-shadow: inset 0 0 5px rgba(0, 153, 221, 0.1);
 }
 
 .MuiDataGrid-cell {
-  border-bottom: 1px solid rgba(0, 204, 204, 0.2);
+  border-bottom: 1px solid rgba(0, 153, 221, 0.2);
 }
 
 /* Responsive Design */

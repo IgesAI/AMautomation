@@ -17,7 +17,7 @@ export function DashboardCards({ summary }: DashboardCardsProps) {
     {
       title: 'Total Items',
       value: summary.totalItems,
-      color: '#00e5ff',
+      color: '#0099dd',
     },
     {
       title: 'Low Stock',
@@ -56,7 +56,7 @@ export function DashboardCards({ summary }: DashboardCardsProps) {
           >
             <Typography
               sx={{
-                color: '#00e5ff',
+                color: '#0099dd',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontSize: '0.85rem',
                 letterSpacing: '0.5px',

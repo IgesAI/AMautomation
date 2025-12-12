@@ -38,6 +38,7 @@ import {
   Delete as DeleteIcon,
   Email as EmailIcon,
   Refresh as RefreshIcon,
+  ArrowBack as ArrowBackIcon,
 } from '@mui/icons-material'
 import { useRouter } from 'next/navigation'
 
@@ -158,6 +159,18 @@ export default function AdminPage() {
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
   const [categoryForm, setCategoryForm] = useState({ name: '', description: '', sortOrder: '' })
   const [categorySaving, setCategorySaving] = useState(false)
+
+  // Location dialog states
+  const [locationDialogOpen, setLocationDialogOpen] = useState(false)
+  const [editingLocation, setEditingLocation] = useState<Location | null>(null)
+  const [locationForm, setLocationForm] = useState({ name: '', description: '' })
+  const [locationSaving, setLocationSaving] = useState(false)
+
+  // Supplier dialog states
+  const [supplierDialogOpen, setSupplierDialogOpen] = useState(false)
+  const [editingSupplier, setEditingSupplier] = useState<Supplier | null>(null)
+  const [supplierForm, setSupplierForm] = useState({ name: '', contactEmail: '', phone: '', notes: '' })
+  const [supplierSaving, setSupplierSaving] = useState(false)
 
   // Delete confirmation
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
@@ -475,6 +488,122 @@ export default function AdminPage() {
     }
   }
 
+  // Location CRUD handlers
+  const openLocationDialog = (location?: Location) => {
+    if (location) {
+      setEditingLocation(location)
+      setLocationForm({
+        name: location.name,
+        description: location.description || '',
+      })
+    } else {
+      setEditingLocation(null)
+      setLocationForm({ name: '', description: '' })
+    }
+    setLocationDialogOpen(true)
+  }
+
+  const closeLocationDialog = () => {
+    setLocationDialogOpen(false)
+    setEditingLocation(null)
+    setLocationForm({ name: '', description: '' })
+  }
+
+  const saveLocation = async () => {
+    if (!locationForm.name.trim()) return
+
+    setLocationSaving(true)
+    try {
+      const locationData = {
+        name: locationForm.name.trim(),
+        description: locationForm.description.trim() || null,
+      }
+
+      if (editingLocation) {
+        await fetch(`/api/locations/${editingLocation.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(locationData),
+        })
+      } else {
+        await fetch('/api/locations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(locationData),
+        })
+      }
+
+      setSuccessMessage(editingLocation ? 'Location updated!' : 'Location created!')
+      setTimeout(() => setSuccessMessage(''), 3000)
+      closeLocationDialog()
+      fetchLocations()
+    } catch (error) {
+      console.error('Failed to save location:', error)
+    } finally {
+      setLocationSaving(false)
+    }
+  }
+
+  // Supplier CRUD handlers
+  const openSupplierDialog = (supplier?: Supplier) => {
+    if (supplier) {
+      setEditingSupplier(supplier)
+      setSupplierForm({
+        name: supplier.name,
+        contactEmail: supplier.contactEmail || '',
+        phone: supplier.phone || '',
+        notes: '',
+      })
+    } else {
+      setEditingSupplier(null)
+      setSupplierForm({ name: '', contactEmail: '', phone: '', notes: '' })
+    }
+    setSupplierDialogOpen(true)
+  }
+
+  const closeSupplierDialog = () => {
+    setSupplierDialogOpen(false)
+    setEditingSupplier(null)
+    setSupplierForm({ name: '', contactEmail: '', phone: '', notes: '' })
+  }
+
+  const saveSupplier = async () => {
+    if (!supplierForm.name.trim()) return
+
+    setSupplierSaving(true)
+    try {
+      const supplierData = {
+        name: supplierForm.name.trim(),
+        contactEmail: supplierForm.contactEmail.trim() || null,
+        phone: supplierForm.phone.trim() || null,
+        notes: supplierForm.notes.trim() || null,
+      }
+
+      if (editingSupplier) {
+        await fetch(`/api/suppliers/${editingSupplier.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(supplierData),
+        })
+      } else {
+        await fetch('/api/suppliers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(supplierData),
+        })
+      }
+
+      setSuccessMessage(editingSupplier ? 'Supplier updated!' : 'Supplier created!')
+      setTimeout(() => setSuccessMessage(''), 3000)
+      closeSupplierDialog()
+      fetchSuppliers()
+    } catch (error) {
+      console.error('Failed to save supplier:', error)
+    } finally {
+      setSupplierSaving(false)
+    }
+  }
+
   // Delete handlers
   const confirmDelete = (type: string, id: string, name: string) => {
     setDeleteTarget({ type, id, name })
@@ -488,6 +617,8 @@ export default function AdminPage() {
       let endpoint = ''
       if (deleteTarget.type === 'item') endpoint = `/api/items/${deleteTarget.id}`
       else if (deleteTarget.type === 'category') endpoint = `/api/categories/${deleteTarget.id}`
+      else if (deleteTarget.type === 'location') endpoint = `/api/locations/${deleteTarget.id}`
+      else if (deleteTarget.type === 'supplier') endpoint = `/api/suppliers/${deleteTarget.id}`
 
       const response = await fetch(endpoint, { method: 'DELETE' })
       if (response.ok) {
@@ -495,6 +626,8 @@ export default function AdminPage() {
         setTimeout(() => setSuccessMessage(''), 3000)
         if (deleteTarget.type === 'item') fetchItems()
         else if (deleteTarget.type === 'category') fetchCategories()
+        else if (deleteTarget.type === 'location') fetchLocations()
+        else if (deleteTarget.type === 'supplier') fetchSuppliers()
       }
     } catch (error) {
       console.error('Delete failed:', error)
@@ -509,8 +642,8 @@ export default function AdminPage() {
       <Container maxWidth="xl" sx={{ py: 4 }}>
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 10px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 10px #0099dd',
             fontFamily: '"VT323", monospace',
             textAlign: 'center',
             fontSize: '1.5rem',
@@ -529,8 +662,8 @@ export default function AdminPage() {
           <Typography
             variant="h4"
             sx={{
-              color: '#00e5ff',
-              textShadow: '0 0 20px #00e5ff, 0 0 40px #00e5ff',
+              color: '#0099dd',
+              textShadow: '0 0 20px #0099dd, 0 0 40px #0099dd',
               fontFamily: '"VT323", monospace',
               textAlign: 'center',
               mb: 4,
@@ -601,16 +734,26 @@ export default function AdminPage() {
 
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography
-          variant="h4"
-          sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 20px #00e5ff, 0 0 40px #00e5ff',
-            fontFamily: '"VT323", monospace',
-          }}
-        >
-          {'>'} Admin Control Terminal<span style={{ animation: 'blink 1s infinite' }}>_</span>
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Button
+            onClick={() => router.push('/')}
+            startIcon={<ArrowBackIcon />}
+            className="terminal-button"
+            size="small"
+          >
+            BACK
+          </Button>
+          <Typography
+            variant="h4"
+            sx={{
+              color: '#0099dd',
+              textShadow: '0 0 20px #0099dd, 0 0 40px #0099dd',
+              fontFamily: '"VT323", monospace',
+            }}
+          >
+            {'>'} Admin Control Terminal<span style={{ animation: 'blink 1s infinite' }}>_</span>
+          </Typography>
+        </Box>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Button
             onClick={fetchAllData}
@@ -652,13 +795,13 @@ export default function AdminPage() {
                 fontFamily: '"Share Tech Mono", monospace',
                 minWidth: 120,
                 '&.Mui-selected': {
-                  color: '#00e5ff',
-                  textShadow: '0 0 8px #00e5ff',
+                  color: '#0099dd',
+                  textShadow: '0 0 8px #0099dd',
                 },
               },
               '& .MuiTabs-indicator': {
-                backgroundColor: '#00e5ff',
-                boxShadow: '0 0 10px #00e5ff',
+                backgroundColor: '#0099dd',
+                boxShadow: '0 0 10px #0099dd',
               },
             }}
           >
@@ -675,8 +818,8 @@ export default function AdminPage() {
             <Typography
               variant="h6"
               sx={{
-                color: '#00e5ff',
-                textShadow: '0 0 15px #00e5ff, 0 0 30px #00e5ff',
+                color: '#0099dd',
+                textShadow: '0 0 15px #0099dd, 0 0 30px #0099dd',
                 fontFamily: '"VT323", monospace',
               }}
             >
@@ -714,8 +857,8 @@ export default function AdminPage() {
                     <TableCell
                       key={header}
                       sx={{
-                        color: '#00e5ff',
-                        textShadow: '0 0 5px #00e5ff',
+                        color: '#0099dd',
+                        textShadow: '0 0 5px #0099dd',
                         fontFamily: '"Share Tech Mono", monospace',
                         fontWeight: 'bold',
                         fontSize: '0.75rem',
@@ -759,8 +902,8 @@ export default function AdminPage() {
                             size="small"
                             sx={{
                               backgroundColor: 'rgba(0, 255, 255, 0.1)',
-                              color: '#00e5ff',
-                              border: '1px solid #00e5ff',
+                              color: '#0099dd',
+                              border: '1px solid #0099dd',
                               fontFamily: '"Share Tech Mono", monospace',
                               fontSize: '0.7rem',
                             }}
@@ -811,8 +954,8 @@ export default function AdminPage() {
             <Typography
               variant="h6"
               sx={{
-                color: '#00e5ff',
-                textShadow: '0 0 15px #00e5ff, 0 0 30px #00e5ff',
+                color: '#0099dd',
+                textShadow: '0 0 15px #0099dd, 0 0 30px #0099dd',
                 fontFamily: '"VT323", monospace',
               }}
             >
@@ -831,8 +974,8 @@ export default function AdminPage() {
                     <TableCell
                       key={header}
                       sx={{
-                        color: '#00e5ff',
-                        textShadow: '0 0 5px #00e5ff',
+                        color: '#0099dd',
+                        textShadow: '0 0 5px #0099dd',
                         fontFamily: '"Share Tech Mono", monospace',
                         fontWeight: 'bold',
                       }}
@@ -889,22 +1032,276 @@ export default function AdminPage() {
 
         {/* LOCATIONS TAB */}
         <TabPanel value={tabValue} index={2}>
-          <Box sx={{ textAlign: 'center', py: 8 }}>
-            <Typography sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace', mb: 2 }}>
-              LOCATION MANAGEMENT - Coming soon
+          <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#0099dd',
+                textShadow: '0 0 15px #0099dd, 0 0 30px #0099dd',
+                fontFamily: '"VT323", monospace',
+              }}
+            >
+              {'>'} Storage Locations
             </Typography>
+            <Button startIcon={<AddIcon />} className="terminal-button" onClick={() => openLocationDialog()}>
+              ADD LOCATION
+            </Button>
           </Box>
+
+          <TableContainer component={Paper} className="terminal-card">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {['NAME', 'DESCRIPTION', 'ACTIONS'].map((header) => (
+                    <TableCell
+                      key={header}
+                      sx={{
+                        color: '#0099dd',
+                        textShadow: '0 0 5px #0099dd',
+                        fontFamily: '"Share Tech Mono", monospace',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {header}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {locations.map((location) => (
+                  <TableRow key={location.id} hover>
+                    <TableCell sx={{ color: '#ffffff', fontFamily: '"Share Tech Mono", monospace' }}>
+                      {location.name}
+                    </TableCell>
+                    <TableCell sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace' }}>
+                      {location.description || '-'}
+                    </TableCell>
+                    <TableCell>
+                      <IconButton
+                        size="small"
+                        onClick={() => openLocationDialog(location)}
+                        sx={{ color: '#ffaa00', '&:hover': { color: '#ffcc00', backgroundColor: 'rgba(255, 170, 0, 0.1)' } }}
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        onClick={() => confirmDelete('location', location.id, location.name)}
+                        sx={{ color: '#ff4444', '&:hover': { color: '#ff6666', backgroundColor: 'rgba(255, 68, 68, 0.1)' } }}
+                      >
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {locations.length === 0 && (
+                  <TableRow>
+                    <TableCell
+                      colSpan={3}
+                      sx={{ textAlign: 'center', color: '#666666', fontFamily: '"Share Tech Mono", monospace', py: 4 }}
+                    >
+                      NO LOCATIONS FOUND - ADD YOUR FIRST LOCATION
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </TabPanel>
 
         {/* SUPPLIERS TAB */}
         <TabPanel value={tabValue} index={3}>
-          <Box sx={{ textAlign: 'center', py: 8 }}>
-            <Typography sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace', mb: 2 }}>
-              SUPPLIER MANAGEMENT - Coming soon
+          <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#0099dd',
+                textShadow: '0 0 15px #0099dd, 0 0 30px #0099dd',
+                fontFamily: '"VT323", monospace',
+              }}
+            >
+              {'>'} Suppliers
             </Typography>
+            <Button startIcon={<AddIcon />} className="terminal-button" onClick={() => openSupplierDialog()}>
+              ADD SUPPLIER
+            </Button>
           </Box>
+
+          <TableContainer component={Paper} className="terminal-card">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {['NAME', 'EMAIL', 'PHONE', 'ACTIONS'].map((header) => (
+                    <TableCell
+                      key={header}
+                      sx={{
+                        color: '#0099dd',
+                        textShadow: '0 0 5px #0099dd',
+                        fontFamily: '"Share Tech Mono", monospace',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {header}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {suppliers.map((supplier) => (
+                  <TableRow key={supplier.id} hover>
+                    <TableCell sx={{ color: '#ffffff', fontFamily: '"Share Tech Mono", monospace' }}>
+                      {supplier.name}
+                    </TableCell>
+                    <TableCell sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace' }}>
+                      {supplier.contactEmail || '-'}
+                    </TableCell>
+                    <TableCell sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace' }}>
+                      {supplier.phone || '-'}
+                    </TableCell>
+                    <TableCell>
+                      <IconButton
+                        size="small"
+                        onClick={() => openSupplierDialog(supplier)}
+                        sx={{ color: '#ffaa00', '&:hover': { color: '#ffcc00', backgroundColor: 'rgba(255, 170, 0, 0.1)' } }}
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        onClick={() => confirmDelete('supplier', supplier.id, supplier.name)}
+                        sx={{ color: '#ff4444', '&:hover': { color: '#ff6666', backgroundColor: 'rgba(255, 68, 68, 0.1)' } }}
+                      >
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {suppliers.length === 0 && (
+                  <TableRow>
+                    <TableCell
+                      colSpan={4}
+                      sx={{ textAlign: 'center', color: '#666666', fontFamily: '"Share Tech Mono", monospace', py: 4 }}
+                    >
+                      NO SUPPLIERS FOUND - ADD YOUR FIRST SUPPLIER
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </TabPanel>
       </Paper>
+
+      {/* LOCATION DIALOG */}
+      <Dialog
+        open={locationDialogOpen}
+        onClose={closeLocationDialog}
+        maxWidth="sm"
+        fullWidth
+        PaperProps={{
+          className: 'terminal-card',
+          sx: { backgroundColor: '#0a1929' },
+        }}
+      >
+        <DialogTitle sx={{ color: '#0099dd', textShadow: '0 0 10px #0099dd', fontFamily: '"VT323", monospace' }}>
+          {editingLocation ? 'EDIT LOCATION' : 'ADD LOCATION'}
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
+            <TextField
+              label="LOCATION NAME *"
+              value={locationForm.name}
+              onChange={(e) => setLocationForm(prev => ({ ...prev, name: e.target.value }))}
+              className="terminal-input"
+              fullWidth
+            />
+            <TextField
+              label="DESCRIPTION"
+              value={locationForm.description}
+              onChange={(e) => setLocationForm(prev => ({ ...prev, description: e.target.value }))}
+              className="terminal-input"
+              fullWidth
+              multiline
+              rows={2}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 3 }}>
+          <Button onClick={closeLocationDialog} className="terminal-button" sx={{ color: '#cccccc', borderColor: '#cccccc' }}>
+            CANCEL
+          </Button>
+          <Button
+            onClick={saveLocation}
+            className="terminal-button"
+            disabled={locationSaving || !locationForm.name.trim()}
+          >
+            {locationSaving ? 'SAVING...' : editingLocation ? 'UPDATE' : 'CREATE'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* SUPPLIER DIALOG */}
+      <Dialog
+        open={supplierDialogOpen}
+        onClose={closeSupplierDialog}
+        maxWidth="sm"
+        fullWidth
+        PaperProps={{
+          className: 'terminal-card',
+          sx: { backgroundColor: '#0a1929' },
+        }}
+      >
+        <DialogTitle sx={{ color: '#0099dd', textShadow: '0 0 10px #0099dd', fontFamily: '"VT323", monospace' }}>
+          {editingSupplier ? 'EDIT SUPPLIER' : 'ADD SUPPLIER'}
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
+            <TextField
+              label="SUPPLIER NAME *"
+              value={supplierForm.name}
+              onChange={(e) => setSupplierForm(prev => ({ ...prev, name: e.target.value }))}
+              className="terminal-input"
+              fullWidth
+            />
+            <TextField
+              label="CONTACT EMAIL"
+              type="email"
+              value={supplierForm.contactEmail}
+              onChange={(e) => setSupplierForm(prev => ({ ...prev, contactEmail: e.target.value }))}
+              className="terminal-input"
+              fullWidth
+            />
+            <TextField
+              label="PHONE NUMBER"
+              value={supplierForm.phone}
+              onChange={(e) => setSupplierForm(prev => ({ ...prev, phone: e.target.value }))}
+              className="terminal-input"
+              fullWidth
+            />
+            <TextField
+              label="NOTES"
+              value={supplierForm.notes}
+              onChange={(e) => setSupplierForm(prev => ({ ...prev, notes: e.target.value }))}
+              className="terminal-input"
+              fullWidth
+              multiline
+              rows={2}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 3 }}>
+          <Button onClick={closeSupplierDialog} className="terminal-button" sx={{ color: '#cccccc', borderColor: '#cccccc' }}>
+            CANCEL
+          </Button>
+          <Button
+            onClick={saveSupplier}
+            className="terminal-button"
+            disabled={supplierSaving || !supplierForm.name.trim()}
+          >
+            {supplierSaving ? 'SAVING...' : editingSupplier ? 'UPDATE' : 'CREATE'}
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* ITEM DIALOG */}
       <Dialog
@@ -917,7 +1314,7 @@ export default function AdminPage() {
           sx: { backgroundColor: '#0a1929' },
         }}
       >
-        <DialogTitle sx={{ color: '#00e5ff', textShadow: '0 0 10px #00e5ff', fontFamily: '"VT323", monospace' }}>
+        <DialogTitle sx={{ color: '#0099dd', textShadow: '0 0 10px #0099dd', fontFamily: '"VT323", monospace' }}>
           {editingItem ? 'EDIT ITEM' : 'ADD NEW ITEM'}
         </DialogTitle>
         <DialogContent>
@@ -943,7 +1340,7 @@ export default function AdminPage() {
               fullWidth
             />
             <FormControl fullWidth>
-              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00e5ff' } }}>CATEGORY *</InputLabel>
+              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#0099dd' } }}>CATEGORY *</InputLabel>
               <Select
                 value={itemForm.categoryId}
                 label="CATEGORY *"
@@ -991,7 +1388,7 @@ export default function AdminPage() {
               helperText="Ideal stock level to maintain"
             />
             <FormControl fullWidth>
-              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00e5ff' } }}>LOCATION</InputLabel>
+              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#0099dd' } }}>LOCATION</InputLabel>
               <Select
                 value={itemForm.locationId}
                 label="LOCATION"
@@ -1005,7 +1402,7 @@ export default function AdminPage() {
               </Select>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00e5ff' } }}>SUPPLIER</InputLabel>
+              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#0099dd' } }}>SUPPLIER</InputLabel>
               <Select
                 value={itemForm.supplierId}
                 label="SUPPLIER"
@@ -1068,7 +1465,7 @@ export default function AdminPage() {
           sx: { backgroundColor: '#0a1929' },
         }}
       >
-        <DialogTitle sx={{ color: '#00e5ff', textShadow: '0 0 10px #00e5ff', fontFamily: '"VT323", monospace' }}>
+        <DialogTitle sx={{ color: '#0099dd', textShadow: '0 0 10px #0099dd', fontFamily: '"VT323", monospace' }}>
           {editingCategory ? 'EDIT CATEGORY' : 'ADD CATEGORY'}
         </DialogTitle>
         <DialogContent>

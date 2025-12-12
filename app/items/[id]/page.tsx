@@ -19,7 +19,7 @@ import {
   TableRow,
   Alert,
 } from '@mui/material'
-import { Add as AddIcon, Edit as EditIcon } from '@mui/icons-material'
+import { Add as AddIcon, Edit as EditIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material'
 import { useParams, useRouter } from 'next/navigation'
 import { format } from 'date-fns'
 import { ItemWithRelations } from '@/lib/item-utils'
@@ -146,8 +146,8 @@ export default function ItemDetailPage() {
       <Container maxWidth="xl" sx={{ py: 4 }}>
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 10px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 10px #0099dd',
             fontFamily: '"VT323", monospace',
             textAlign: 'center',
             fontSize: '1.5rem',
@@ -189,16 +189,26 @@ export default function ItemDetailPage() {
       {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Typography
-            variant="h4"
-            sx={{
-              color: '#00e5ff',
-              textShadow: '0 0 15px #00e5ff',
-              fontFamily: '"VT323", monospace',
-            }}
-          >
-            {item.name}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Button
+              onClick={() => router.push('/items')}
+              startIcon={<ArrowBackIcon />}
+              className="terminal-button"
+              size="small"
+            >
+              BACK
+            </Button>
+            <Typography
+              variant="h4"
+              sx={{
+                color: '#0099dd',
+                textShadow: '0 0 15px #0099dd',
+                fontFamily: '"VT323", monospace',
+              }}
+            >
+              {item.name}
+            </Typography>
+          </Box>
           <Box sx={{ display: 'flex', gap: 2 }}>
             <Button
               onClick={() => setTransactionDialogOpen(true)}
@@ -225,7 +235,7 @@ export default function ItemDetailPage() {
               sx={{
                 backgroundColor: 'rgba(0, 255, 255, 0.1)',
                 border: '1px solid #00cccc',
-                color: '#00e5ff',
+                color: '#0099dd',
                 fontFamily: '"Share Tech Mono", monospace',
               }}
             />
@@ -244,13 +254,13 @@ export default function ItemDetailPage() {
                 color: '#cccccc',
                 fontFamily: '"Share Tech Mono", monospace',
                 '&.Mui-selected': {
-                  color: '#00e5ff',
-                  textShadow: '0 0 8px #00e5ff',
+                  color: '#0099dd',
+                  textShadow: '0 0 8px #0099dd',
                 },
               },
               '& .MuiTabs-indicator': {
-                backgroundColor: '#00e5ff',
-                boxShadow: '0 0 10px #00e5ff',
+                backgroundColor: '#0099dd',
+                boxShadow: '0 0 10px #0099dd',
               },
             }}
           >
@@ -274,8 +284,8 @@ export default function ItemDetailPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    color: '#00e5ff',
-                    textShadow: '0 0 8px #00e5ff',
+                    color: '#0099dd',
+                    textShadow: '0 0 8px #0099dd',
                     fontFamily: '"VT323", monospace',
                     mb: 3,
                   }}
@@ -374,8 +384,8 @@ export default function ItemDetailPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    color: '#00e5ff',
-                    textShadow: '0 0 8px #00e5ff',
+                    color: '#0099dd',
+                    textShadow: '0 0 8px #0099dd',
                     fontFamily: '"VT323", monospace',
                     mb: 3,
                   }}
@@ -405,8 +415,8 @@ export default function ItemDetailPage() {
                 <TableRow>
                   <TableCell
                     sx={{
-                      color: '#00e5ff',
-                      textShadow: '0 0 5px #00e5ff',
+                      color: '#0099dd',
+                      textShadow: '0 0 5px #0099dd',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',
@@ -417,8 +427,8 @@ export default function ItemDetailPage() {
                   <TableCell
                     align="right"
                     sx={{
-                      color: '#00e5ff',
-                      textShadow: '0 0 5px #00e5ff',
+                      color: '#0099dd',
+                      textShadow: '0 0 5px #0099dd',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',
@@ -428,8 +438,8 @@ export default function ItemDetailPage() {
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: '#00e5ff',
-                      textShadow: '0 0 5px #00e5ff',
+                      color: '#0099dd',
+                      textShadow: '0 0 5px #0099dd',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',
@@ -439,8 +449,8 @@ export default function ItemDetailPage() {
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: '#00e5ff',
-                      textShadow: '0 0 5px #00e5ff',
+                      color: '#0099dd',
+                      textShadow: '0 0 5px #0099dd',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',

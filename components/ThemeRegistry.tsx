@@ -5,16 +5,23 @@ import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { createTheme } from '@mui/material/styles'
 
+// Dark blue color scheme
+const BLUE = '#0099dd'
+const BLUE_LIGHT = '#33bbff'
+const BLUE_DARK = '#0077aa'
+const BLUE_GLOW = 'rgba(0, 153, 221, 0.5)'
+const BLUE_GLOW_LIGHT = 'rgba(0, 153, 221, 0.3)'
+
 const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#00e5ff', // Cyan (matching portal)
-      light: '#6effff',
-      dark: '#00b2cc',
+      main: BLUE,
+      light: BLUE_LIGHT,
+      dark: BLUE_DARK,
     },
     secondary: {
-      main: '#ff00ff', // Magenta
+      main: '#ff00ff',
       light: '#ff33ff',
       dark: '#cc00cc',
     },
@@ -44,37 +51,37 @@ const theme = createTheme({
     h1: {
       fontFamily: '"VT323", monospace',
       fontSize: '3rem',
-      textShadow: '0 0 10px #00e5ff',
+      textShadow: `0 0 10px ${BLUE}`,
       letterSpacing: '0.1em',
     },
     h2: {
       fontFamily: '"VT323", monospace',
       fontSize: '2.5rem',
-      textShadow: '0 0 8px #00e5ff',
+      textShadow: `0 0 8px ${BLUE}`,
       letterSpacing: '0.1em',
     },
     h3: {
       fontFamily: '"VT323", monospace',
       fontSize: '2rem',
-      textShadow: '0 0 6px #00e5ff',
+      textShadow: `0 0 6px ${BLUE}`,
       letterSpacing: '0.08em',
     },
     h4: {
       fontFamily: '"VT323", monospace',
       fontSize: '1.75rem',
-      textShadow: '0 0 5px #00e5ff',
+      textShadow: `0 0 5px ${BLUE}`,
       letterSpacing: '0.08em',
     },
     h5: {
       fontFamily: '"Share Tech Mono", monospace',
       fontSize: '1.5rem',
-      textShadow: '0 0 4px #00e5ff',
+      textShadow: `0 0 4px ${BLUE}`,
       letterSpacing: '0.06em',
     },
     h6: {
       fontFamily: '"Share Tech Mono", monospace',
       fontSize: '1.25rem',
-      textShadow: '0 0 3px #00e5ff',
+      textShadow: `0 0 3px ${BLUE}`,
       letterSpacing: '0.06em',
     },
     body1: {
@@ -102,13 +109,13 @@ const theme = createTheme({
             width: '8px',
           },
           '&::-webkit-scrollbar-track': {
-            background: '#001122',
+            background: '#0a0a0a',
           },
           '&::-webkit-scrollbar-thumb': {
-            background: '#00e5ff',
+            background: BLUE,
             borderRadius: '4px',
             '&:hover': {
-              background: '#6effff',
+              background: BLUE_LIGHT,
             },
           },
         },
@@ -119,12 +126,12 @@ const theme = createTheme({
         root: {
           backgroundImage: 'none',
           backgroundColor: 'rgba(10, 10, 10, 0.95)',
-          border: '1px solid #00e5ff',
+          border: `1px solid ${BLUE}`,
           borderRadius: '8px',
-          boxShadow: '0 0 15px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.1)',
+          boxShadow: `0 0 15px ${BLUE_GLOW}, 0 0 30px ${BLUE_GLOW_LIGHT}`,
           '&:hover': {
-            boxShadow: '0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2)',
-            borderColor: '#6effff',
+            boxShadow: `0 0 20px ${BLUE_GLOW}, 0 0 40px ${BLUE_GLOW_LIGHT}`,
+            borderColor: BLUE_LIGHT,
           },
         },
       },
@@ -132,24 +139,24 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          border: '1px solid #00e5ff',
+          border: `1px solid ${BLUE}`,
           borderRadius: '2px',
-          boxShadow: '0 0 10px rgba(0, 255, 255, 0.3)',
-          textShadow: '0 0 5px #00e5ff',
+          boxShadow: `0 0 10px ${BLUE_GLOW_LIGHT}`,
+          textShadow: `0 0 5px ${BLUE}`,
           '&:hover': {
-            backgroundColor: 'rgba(0, 255, 255, 0.1)',
-            borderColor: '#6effff',
-            boxShadow: '0 0 20px rgba(0, 255, 255, 0.5)',
-            textShadow: '0 0 8px #6effff',
+            backgroundColor: `${BLUE}22`,
+            borderColor: BLUE_LIGHT,
+            boxShadow: `0 0 20px ${BLUE_GLOW}`,
+            textShadow: `0 0 8px ${BLUE_LIGHT}`,
           },
           '&:active': {
-            boxShadow: 'inset 0 0 10px rgba(0, 255, 255, 0.8)',
+            boxShadow: `inset 0 0 10px ${BLUE_GLOW}`,
           },
         },
         contained: {
-          backgroundColor: 'rgba(0, 255, 255, 0.1)',
+          backgroundColor: `${BLUE}22`,
           '&:hover': {
-            backgroundColor: 'rgba(0, 255, 255, 0.2)',
+            backgroundColor: `${BLUE}44`,
           },
         },
       },
@@ -158,24 +165,24 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
-            border: '1px solid #00cccc',
+            border: `1px solid ${BLUE_DARK}`,
             borderRadius: '2px',
-            boxShadow: '0 0 8px rgba(0, 255, 255, 0.2)',
+            boxShadow: `0 0 8px ${BLUE_GLOW_LIGHT}`,
             '&:hover': {
-              borderColor: '#00e5ff',
-              boxShadow: '0 0 12px rgba(0, 255, 255, 0.3)',
+              borderColor: BLUE,
+              boxShadow: `0 0 12px ${BLUE_GLOW_LIGHT}`,
             },
             '&.Mui-focused': {
-              borderColor: '#6effff',
-              boxShadow: '0 0 15px rgba(0, 255, 255, 0.4)',
+              borderColor: BLUE_LIGHT,
+              boxShadow: `0 0 15px ${BLUE_GLOW}`,
             },
           },
           '& .MuiInputLabel-root': {
             color: '#cccccc',
-            textShadow: '0 0 3px #00e5ff',
+            textShadow: `0 0 3px ${BLUE}`,
           },
           '& .MuiInputLabel-root.Mui-focused': {
-            color: '#00e5ff',
+            color: BLUE,
           },
         },
       },
@@ -183,10 +190,10 @@ const theme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          border: '1px solid #00cccc',
-          boxShadow: '0 0 5px rgba(0, 255, 255, 0.2)',
+          border: `1px solid ${BLUE_DARK}`,
+          boxShadow: `0 0 5px ${BLUE_GLOW_LIGHT}`,
           '&:hover': {
-            boxShadow: '0 0 10px rgba(0, 255, 255, 0.3)',
+            boxShadow: `0 0 10px ${BLUE_GLOW_LIGHT}`,
           },
         },
       },
@@ -195,9 +202,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiTableCell-head': {
-            backgroundColor: '#001122',
-            borderBottom: '1px solid #00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            backgroundColor: '#0a0a0a',
+            borderBottom: `1px solid ${BLUE}`,
+            textShadow: `0 0 5px ${BLUE}`,
           },
         },
       },
@@ -206,8 +213,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '&:hover': {
-            backgroundColor: 'rgba(0, 255, 255, 0.05)',
-            boxShadow: 'inset 0 0 5px rgba(0, 255, 255, 0.1)',
+            backgroundColor: `${BLUE}11`,
+            boxShadow: `inset 0 0 5px ${BLUE_GLOW_LIGHT}`,
           },
         },
       },
@@ -215,9 +222,28 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#000011',
-          borderBottom: '1px solid #00e5ff',
-          boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)',
+          backgroundColor: '#0a0a0a',
+          borderBottom: `1px solid ${BLUE}`,
+          boxShadow: `0 0 20px ${BLUE_GLOW_LIGHT}`,
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: BLUE,
+          boxShadow: `0 0 10px ${BLUE}`,
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: '#888888',
+          '&.Mui-selected': {
+            color: BLUE,
+            textShadow: `0 0 8px ${BLUE}`,
+          },
         },
       },
     },

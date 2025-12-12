@@ -15,7 +15,7 @@ import {
   IconButton,
 } from '@mui/material'
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
-import { Search as SearchIcon, FilterList as FilterIcon, Add as AddIcon } from '@mui/icons-material'
+import { Search as SearchIcon, FilterList as FilterIcon, Add as AddIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material'
 import { ItemWithRelations } from '@/lib/item-utils'
 import { StatusBadge } from '@/components/StatusBadge'
 import { useRouter } from 'next/navigation'
@@ -78,8 +78,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -107,8 +107,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -137,8 +137,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -169,8 +169,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -202,8 +202,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -231,8 +231,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -260,8 +260,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -282,8 +282,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -311,8 +311,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 5px #00e5ff',
+            color: '#0099dd',
+            textShadow: '0 0 5px #0099dd',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -327,9 +327,9 @@ export default function InventoryPage() {
             size="small"
             onClick={() => router.push(`/items/${params.row.id}`)}
             sx={{
-              color: '#00e5ff',
+              color: '#0099dd',
               '&:hover': {
-                color: '#6effff',
+                color: '#33bbff',
                 backgroundColor: 'rgba(0, 255, 255, 0.1)',
               },
             }}
@@ -345,18 +345,26 @@ export default function InventoryPage() {
     <Container maxWidth="xl" sx={{ py: 4 }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="h4"
-          sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 20px #00e5ff, 0 0 40px #00e5ff',
-            fontFamily: '"VT323", monospace',
-            mb: 2,
-            textAlign: 'center',
-          }}
-        >
-          {'>'} Inventory Management System<span style={{ animation: 'blink 1s infinite' }}>_</span>
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 2 }}>
+          <Button
+            onClick={() => router.push('/')}
+            startIcon={<ArrowBackIcon />}
+            className="terminal-button"
+            size="small"
+          >
+            BACK
+          </Button>
+          <Typography
+            variant="h4"
+            sx={{
+              color: '#0099dd',
+              textShadow: '0 0 20px #0099dd, 0 0 40px #0099dd',
+              fontFamily: '"VT323", monospace',
+            }}
+          >
+            {'>'} Inventory Management System<span style={{ animation: 'blink 1s infinite' }}>_</span>
+          </Typography>
+        </Box>
 
         {/* Filters */}
         <Paper
@@ -382,7 +390,7 @@ export default function InventoryPage() {
               <InputLabel
                 sx={{
                   color: '#cccccc',
-                  '&.Mui-focused': { color: '#00e5ff' },
+                  '&.Mui-focused': { color: '#0099dd' },
                 }}
               >
                 Status Filter
@@ -405,7 +413,7 @@ export default function InventoryPage() {
               <InputLabel
                 sx={{
                   color: '#cccccc',
-                  '&.Mui-focused': { color: '#00e5ff' },
+                  '&.Mui-focused': { color: '#0099dd' },
                 }}
               >
                 Category Filter
@@ -462,7 +470,7 @@ export default function InventoryPage() {
             border: 'none',
             '& .MuiDataGrid-columnHeaders': {
               backgroundColor: 'rgba(0, 17, 34, 0.9)',
-              borderBottom: '1px solid #00e5ff',
+              borderBottom: '1px solid #0099dd',
             },
             '& .MuiDataGrid-row:hover': {
               backgroundColor: 'rgba(0, 255, 255, 0.05)',

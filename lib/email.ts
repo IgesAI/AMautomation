@@ -74,7 +74,7 @@ export function generateNotificationEmail(
       break
     default:
       subject = `[AM Inventory] Status Update: ${itemName}`
-      statusColor = '#00e5ff'
+      statusColor = '#0099dd'
       statusText = 'STATUS UPDATE'
   }
 
@@ -102,7 +102,7 @@ export function generateNotificationEmail(
         }
         .header {
           text-align: center;
-          border-bottom: 1px solid #00e5ff;
+          border-bottom: 1px solid #0099dd;
           padding-bottom: 10px;
           margin-bottom: 20px;
         }
@@ -135,8 +135,8 @@ export function generateNotificationEmail(
           color: #cccccc;
         }
         .detail-value {
-          color: #00e5ff;
-          text-shadow: 0 0 3px #00e5ff;
+          color: #0099dd;
+          text-shadow: 0 0 3px #0099dd;
         }
         .transactions {
           margin-top: 20px;
@@ -161,12 +161,12 @@ export function generateNotificationEmail(
           display: inline-block;
           padding: 8px 16px;
           background: rgba(0, 255, 255, 0.1);
-          border: 1px solid #00e5ff;
+          border: 1px solid #0099dd;
           border-radius: 2px;
-          color: #00e5ff;
+          color: #0099dd;
           text-decoration: none;
           margin: 10px 5px;
-          text-shadow: 0 0 3px #00e5ff;
+          text-shadow: 0 0 3px #0099dd;
           box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
         }
         .action-button:hover {
@@ -178,7 +178,7 @@ export function generateNotificationEmail(
     <body>
       <div class="container">
         <div class="header">
-          <h1 style="color: #00e5ff; text-shadow: 0 0 10px #00e5ff; margin: 0; font-size: 24px;">
+          <h1 style="color: #0099dd; text-shadow: 0 0 10px #0099dd; margin: 0; font-size: 24px;">
             AM INVENTORY ALERT
           </h1>
           <div class="status-badge">${statusText}</div>
@@ -209,7 +209,7 @@ export function generateNotificationEmail(
 
         ${recentTransactions.length > 0 ? `
         <div class="transactions">
-          <h3 style="color: #00e5ff; margin: 15px 0 10px 0; font-size: 14px;">RECENT ACTIVITY</h3>
+          <h3 style="color: #0099dd; margin: 15px 0 10px 0; font-size: 14px;">RECENT ACTIVITY</h3>
           ${recentTransactions.map(tx => `
             <div class="transaction-item">
               <strong>${tx.type}</strong> ${tx.quantityChange > 0 ? '+' : ''}${tx.quantityChange} ${unitOfMeasure}

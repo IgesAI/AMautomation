@@ -15,7 +15,7 @@ import {
   Autocomplete,
   Alert,
 } from '@mui/material'
-import { Send as SendIcon } from '@mui/icons-material'
+import { Send as SendIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material'
 import { useRouter } from 'next/navigation'
 import { TransactionFormData } from '@/components/TransactionDialog'
 
@@ -174,18 +174,27 @@ export default function QuickUsagePage() {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4, textAlign: 'center' }}>
-        <Typography
-          variant="h4"
-          sx={{
-            color: '#00e5ff',
-            textShadow: '0 0 15px #00e5ff',
-            fontFamily: '"VT323", monospace',
-            mb: 2,
-          }}
-        >
-          QUICK USAGE LOG
-        </Typography>
+      <Box sx={{ mb: 4 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 2 }}>
+          <Button
+            onClick={() => router.push('/')}
+            startIcon={<ArrowBackIcon />}
+            className="terminal-button"
+            size="small"
+          >
+            BACK
+          </Button>
+          <Typography
+            variant="h4"
+            sx={{
+              color: '#0099dd',
+              textShadow: '0 0 15px #0099dd',
+              fontFamily: '"VT323", monospace',
+            }}
+          >
+            QUICK USAGE LOG
+          </Typography>
+        </Box>
         <Typography
           variant="h6"
           sx={{
@@ -253,10 +262,10 @@ export default function QuickUsagePage() {
               )}
               sx={{
                 '& .MuiAutocomplete-popupIndicator': {
-                  color: '#00e5ff',
+                  color: '#0099dd',
                 },
                 '& .MuiAutocomplete-clearIndicator': {
-                  color: '#00e5ff',
+                  color: '#0099dd',
                 },
               }}
             />
@@ -283,7 +292,7 @@ export default function QuickUsagePage() {
               <InputLabel
                 sx={{
                   color: '#cccccc',
-                  '&.Mui-focused': { color: '#00e5ff' },
+                  '&.Mui-focused': { color: '#0099dd' },
                 }}
               >
                 MACHINE/AREA
