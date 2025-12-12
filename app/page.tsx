@@ -19,12 +19,14 @@ interface DashboardSummary {
   expiringSoonItems: number
   recentTransactions: Array<{
     id: string
+    itemId: string
     type: string
     quantityChange: number
     createdAt: string
     performedBy?: string | null
     machineOrArea?: string | null
     jobReference?: string | null
+    notes?: string | null
     item: {
       name: string
       sku: string | null
