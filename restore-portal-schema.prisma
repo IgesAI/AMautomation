@@ -1,0 +1,47 @@
+// Temporary file to restore portal schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PrintRequest {
+  id             String         @id
+  partNumber     String
+  description    String?
+  quantity       Int
+  deadline       DateTime?
+  status         RequestStatus  @default(pending)
+  requestType    RequestType    @default(rd_parts)
+  requesterName  String
+  requesterEmail String
+  fileName       String?
+  filePath       String?
+  fileSize       Int?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime
+  completedAt    DateTime?
+  notes          String?
+  workOrderType  WorkOrderType?
+}
+
+enum RequestStatus {
+  pending
+  in_progress
+  completed
+  cancelled
+}
+
+enum RequestType {
+  rd_parts
+  work_order
+}
+
+enum WorkOrderType {
+  aero
+  moto
+}
+

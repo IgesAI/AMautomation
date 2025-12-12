@@ -54,8 +54,8 @@ export async function POST(request: NextRequest) {
         break
       case TransactionType.CONSUME:
         quantityChange = -quantity
-        // Check if there's enough stock
-        if (item.currentQuantity < quantity) {
+        // Check if there's enough stock (convert Decimal to number for comparison)
+        if (Number(item.currentQuantity) < quantity) {
           return NextResponse.json(
             { error: `Insufficient stock. Current: ${item.currentQuantity}, Requested: ${quantity}` },
             { status: 400 }
