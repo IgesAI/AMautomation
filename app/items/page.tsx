@@ -451,9 +451,13 @@ export default function InventoryPage() {
           rows={items}
           columns={columns}
           loading={loading}
-          pageSize={25}
-          rowsPerPageOptions={[10, 25, 50]}
-          disableSelectionOnClick
+          initialState={{
+            pagination: {
+              paginationModel: { pageSize: 25, page: 0 },
+            },
+          }}
+          pageSizeOptions={[10, 25, 50]}
+          disableRowSelectionOnClick
           sx={{
             border: 'none',
             '& .MuiDataGrid-columnHeaders': {
