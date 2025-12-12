@@ -8,7 +8,6 @@ import {
   Paper,
   Tabs,
   Tab,
-  Grid,
   Button,
   Chip,
   Table,
@@ -19,6 +18,7 @@ import {
   TableRow,
   Alert,
 } from '@mui/material'
+import Grid from '@mui/material/Grid2'
 import { Add as AddIcon, Edit as EditIcon } from '@mui/icons-material'
 import { useParams, useRouter } from 'next/navigation'
 import { format } from 'date-fns'
@@ -263,7 +263,7 @@ export default function ItemDetailPage() {
         {/* Details Tab */}
         <TabPanel value={tabValue} index={0}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+            <Grid xs={12} md={6}>
               <Paper
                 className="terminal-card"
                 sx={{
@@ -363,7 +363,7 @@ export default function ItemDetailPage() {
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid xs={12} md={6}>
               <Paper
                 className="terminal-card"
                 sx={{

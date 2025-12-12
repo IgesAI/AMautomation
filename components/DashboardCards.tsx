@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Paper, Typography, Box } from '@mui/material'
+import { Paper, Typography, Box } from '@mui/material'
+import Grid from '@mui/material/Grid2'
 
 interface DashboardSummary {
   totalItems: number
@@ -39,7 +40,7 @@ export function DashboardCards({ summary }: DashboardCardsProps) {
   return (
     <Grid container spacing={2}>
       {cards.map((card) => (
-        <Grid item xs={6} sm={3} md={2.4} key={card.title}>
+        <Grid xs={6} sm={3} md={2.4} key={card.title}>
           <Paper
             className="terminal-card"
             sx={{

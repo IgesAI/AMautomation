@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Container, Grid, Typography, Paper, Box, Button, Alert } from '@mui/material'
+import { Container, Typography, Paper, Box, Button, Alert } from '@mui/material'
+import Grid from '@mui/material/Grid2'
 import { DashboardCards } from '@/components/DashboardCards'
 import { ItemTable } from '@/components/ItemTable'
 import { RecentActivity } from '@/components/RecentActivity'
@@ -193,7 +194,7 @@ export default function Dashboard() {
 
       <Grid container spacing={4}>
         {/* Critical Items Table */}
-        <Grid item xs={12} lg={8}>
+        <Grid xs={12} lg={8}>
           <Paper
             className="terminal-card"
             sx={{
@@ -253,7 +254,7 @@ export default function Dashboard() {
         </Grid>
 
         {/* Recent Activity */}
-        <Grid item xs={12} lg={4}>
+        <Grid xs={12} lg={4}>
           {summary && <RecentActivity transactions={summary.recentTransactions} />}
         </Grid>
       </Grid>
