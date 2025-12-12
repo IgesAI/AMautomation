@@ -4,8 +4,16 @@ import { requireAdmin } from '@/lib/auth'
 
 export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url)
+    const itemId = searchParams.get('itemId')
+
+    const where: { isActive: boolean; itemId?: string } = { isActive: true }
+    if (itemId) {
+      where.itemId = itemId
+    }
+
     const rules = await prisma.notificationRule.findMany({
-      where: { isActive: true },
+      where,
       include: {
         item: { select: { name: true, sku: true } },
         category: { select: { name: true } },
@@ -53,13 +61,41 @@ export async function POST(request: NextRequest) {
     // Verify item exists if specified
     if (body.itemId) {
       const item = await prisma.consumableItem.findUnique({
-        where: { id: body.itemId, isActive: true }
+        where: { id: body.itemId }
       })
       if (!item) {
         return NextResponse.json(
           { error: 'Invalid item ID' },
           { status: 400 }
         )
+      }
+
+      // Check if a rule already exists for this item - if so, update it
+      const existingRule = await prisma.notificationRule.findFirst({
+        where: { itemId: body.itemId }
+      })
+
+      if (existingRule) {
+        const updatedRule = await prisma.notificationRule.update({
+          where: { id: existingRule.id },
+          data: {
+            emails: body.emails,
+            notifyOnLowStock: body.notifyOnLowStock !== undefined ? body.notifyOnLowStock : true,
+            notifyOnOutOfStock: body.notifyOnOutOfStock !== undefined ? body.notifyOnOutOfStock : true,
+            notifyOnExpiringSoon: body.notifyOnExpiringSoon !== undefined ? body.notifyOnExpiringSoon : true,
+            expiringSoonDays: body.expiringSoonDays || 30,
+            isActive: body.isActive !== undefined ? body.isActive : true,
+          },
+          include: {
+            item: { select: { name: true, sku: true } },
+            category: { select: { name: true } },
+          }
+        })
+
+        return NextResponse.json({
+          success: true,
+          data: updatedRule
+        })
       }
     }
 
