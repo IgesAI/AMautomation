@@ -7,6 +7,10 @@ import { ItemTable } from '@/components/ItemTable'
 import { RecentActivity } from '@/components/RecentActivity'
 import { ItemWithRelations } from '@/lib/item-utils'
 import { useRouter } from 'next/navigation'
+import { ItemStatus } from '@prisma/client'
+
+// Items from API include calculated status
+type ItemWithStatus = ItemWithRelations & { status: ItemStatus }
 
 interface DashboardSummary {
   totalItems: number
@@ -31,7 +35,7 @@ interface DashboardSummary {
 
 export default function Dashboard() {
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
-  const [criticalItems, setCriticalItems] = useState<ItemWithRelations[]>([])
+  const [criticalItems, setCriticalItems] = useState<ItemWithStatus[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()

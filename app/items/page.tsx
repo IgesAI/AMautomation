@@ -19,9 +19,13 @@ import { Search as SearchIcon, FilterList as FilterIcon, Add as AddIcon } from '
 import { ItemWithRelations } from '@/lib/item-utils'
 import { StatusBadge } from '@/components/StatusBadge'
 import { useRouter } from 'next/navigation'
+import { ItemStatus } from '@prisma/client'
+
+// Items from API include calculated status
+type ItemWithStatus = ItemWithRelations & { status: ItemStatus }
 
 export default function InventoryPage() {
-  const [items, setItems] = useState<ItemWithRelations[]>([])
+  const [items, setItems] = useState<ItemWithStatus[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('')

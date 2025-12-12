@@ -13,9 +13,13 @@ import {
 import { Visibility as ViewIcon, Edit as EditIcon } from '@mui/icons-material'
 import { ItemWithRelations } from '@/lib/item-utils'
 import { StatusBadge } from './StatusBadge'
+import { ItemStatus } from '@prisma/client'
+
+// Items from API include calculated status
+type ItemWithStatus = ItemWithRelations & { status: ItemStatus }
 
 interface ItemTableProps {
-  items: ItemWithRelations[]
+  items: ItemWithStatus[]
   onViewItem?: (itemId: string) => void
   onEditItem?: (itemId: string) => void
   showActions?: boolean

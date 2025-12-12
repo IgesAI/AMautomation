@@ -9,13 +9,13 @@ export type ItemWithRelations = ConsumableItem & {
 }
 
 export function calculateItemStatus(item: ConsumableItem): ItemStatus {
-  // Check if out of stock
-  if (item.currentQuantity <= 0) {
+  // Check if out of stock (convert Decimal to number for comparison)
+  if (Number(item.currentQuantity) <= 0) {
     return ItemStatus.OUT_OF_STOCK
   }
 
   // Check if low stock
-  if (item.currentQuantity <= item.minimumQuantity) {
+  if (Number(item.currentQuantity) <= Number(item.minimumQuantity)) {
     return ItemStatus.LOW
   }
 
