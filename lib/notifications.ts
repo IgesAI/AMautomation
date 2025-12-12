@@ -163,10 +163,10 @@ async function sendNotificationToRecipients(
       Number(itemWithDetails.minimumQuantity),
       Number(itemWithDetails.reorderQuantity),
       itemWithDetails.unitOfMeasure,
-      itemWithDetails.location?.name,
-      itemWithDetails.supplier?.name,
       notificationType,
-      recentTransactions
+      recentTransactions,
+      itemWithDetails.location?.name,
+      itemWithDetails.supplier?.name
     )
 
     // Send email

@@ -35,8 +35,6 @@ export function generateNotificationEmail(
   minimumQuantity: number,
   reorderQuantity: number,
   unitOfMeasure: string,
-  locationName?: string | null,
-  supplierName?: string | null,
   notificationType: NotificationType,
   recentTransactions: Array<{
     type: string
@@ -45,7 +43,9 @@ export function generateNotificationEmail(
     performedBy?: string | null
     machineOrArea?: string | null
     jobReference?: string | null
-  }>
+  }>,
+  locationName?: string | null,
+  supplierName?: string | null
 ): { subject: string; html: string } {
 
   const quantityStr = `${currentQuantity} ${unitOfMeasure}`
