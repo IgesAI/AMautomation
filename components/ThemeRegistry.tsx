@@ -9,9 +9,9 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#00ffff', // Cyan
-      light: '#33ffff',
-      dark: '#00cccc',
+      main: '#00e5ff', // Cyan (matching portal)
+      light: '#6effff',
+      dark: '#00b2cc',
     },
     secondary: {
       main: '#ff00ff', // Magenta
@@ -44,37 +44,37 @@ const theme = createTheme({
     h1: {
       fontFamily: '"VT323", monospace',
       fontSize: '3rem',
-      textShadow: '0 0 10px #00ffff',
+      textShadow: '0 0 10px #00e5ff',
       letterSpacing: '0.1em',
     },
     h2: {
       fontFamily: '"VT323", monospace',
       fontSize: '2.5rem',
-      textShadow: '0 0 8px #00ffff',
+      textShadow: '0 0 8px #00e5ff',
       letterSpacing: '0.1em',
     },
     h3: {
       fontFamily: '"VT323", monospace',
       fontSize: '2rem',
-      textShadow: '0 0 6px #00ffff',
+      textShadow: '0 0 6px #00e5ff',
       letterSpacing: '0.08em',
     },
     h4: {
       fontFamily: '"VT323", monospace',
       fontSize: '1.75rem',
-      textShadow: '0 0 5px #00ffff',
+      textShadow: '0 0 5px #00e5ff',
       letterSpacing: '0.08em',
     },
     h5: {
       fontFamily: '"Share Tech Mono", monospace',
       fontSize: '1.5rem',
-      textShadow: '0 0 4px #00ffff',
+      textShadow: '0 0 4px #00e5ff',
       letterSpacing: '0.06em',
     },
     h6: {
       fontFamily: '"Share Tech Mono", monospace',
       fontSize: '1.25rem',
-      textShadow: '0 0 3px #00ffff',
+      textShadow: '0 0 3px #00e5ff',
       letterSpacing: '0.06em',
     },
     body1: {
@@ -105,10 +105,10 @@ const theme = createTheme({
             background: '#001122',
           },
           '&::-webkit-scrollbar-thumb': {
-            background: '#00ffff',
+            background: '#00e5ff',
             borderRadius: '4px',
             '&:hover': {
-              background: '#33ffff',
+              background: '#6effff',
             },
           },
         },
@@ -119,12 +119,12 @@ const theme = createTheme({
         root: {
           backgroundImage: 'none',
           backgroundColor: 'rgba(10, 10, 10, 0.95)',
-          border: '1px solid #00ffff',
+          border: '1px solid #00e5ff',
           borderRadius: '8px',
           boxShadow: '0 0 15px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.1)',
           '&:hover': {
             boxShadow: '0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2)',
-            borderColor: '#33ffff',
+            borderColor: '#6effff',
           },
         },
       },
@@ -132,15 +132,15 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          border: '1px solid #00ffff',
+          border: '1px solid #00e5ff',
           borderRadius: '2px',
           boxShadow: '0 0 10px rgba(0, 255, 255, 0.3)',
-          textShadow: '0 0 5px #00ffff',
+          textShadow: '0 0 5px #00e5ff',
           '&:hover': {
             backgroundColor: 'rgba(0, 255, 255, 0.1)',
-            borderColor: '#33ffff',
+            borderColor: '#6effff',
             boxShadow: '0 0 20px rgba(0, 255, 255, 0.5)',
-            textShadow: '0 0 8px #33ffff',
+            textShadow: '0 0 8px #6effff',
           },
           '&:active': {
             boxShadow: 'inset 0 0 10px rgba(0, 255, 255, 0.8)',
@@ -162,20 +162,20 @@ const theme = createTheme({
             borderRadius: '2px',
             boxShadow: '0 0 8px rgba(0, 255, 255, 0.2)',
             '&:hover': {
-              borderColor: '#00ffff',
+              borderColor: '#00e5ff',
               boxShadow: '0 0 12px rgba(0, 255, 255, 0.3)',
             },
             '&.Mui-focused': {
-              borderColor: '#33ffff',
+              borderColor: '#6effff',
               boxShadow: '0 0 15px rgba(0, 255, 255, 0.4)',
             },
           },
           '& .MuiInputLabel-root': {
             color: '#cccccc',
-            textShadow: '0 0 3px #00ffff',
+            textShadow: '0 0 3px #00e5ff',
           },
           '& .MuiInputLabel-root.Mui-focused': {
-            color: '#00ffff',
+            color: '#00e5ff',
           },
         },
       },
@@ -196,8 +196,8 @@ const theme = createTheme({
         root: {
           '& .MuiTableCell-head': {
             backgroundColor: '#001122',
-            borderBottom: '1px solid #00ffff',
-            textShadow: '0 0 5px #00ffff',
+            borderBottom: '1px solid #00e5ff',
+            textShadow: '0 0 5px #00e5ff',
           },
         },
       },
@@ -216,7 +216,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#000011',
-          borderBottom: '1px solid #00ffff',
+          borderBottom: '1px solid #00e5ff',
           boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)',
         },
       },

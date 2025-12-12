@@ -78,8 +78,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -107,8 +107,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -137,8 +137,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -169,8 +169,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -202,8 +202,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -231,8 +231,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -260,8 +260,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -282,8 +282,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -311,8 +311,8 @@ export default function InventoryPage() {
       renderHeader: (params) => (
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 5px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 5px #00e5ff',
             fontFamily: '"Share Tech Mono", monospace',
             fontWeight: 'bold',
             fontSize: '0.875rem',
@@ -327,9 +327,9 @@ export default function InventoryPage() {
             size="small"
             onClick={() => router.push(`/items/${params.row.id}`)}
             sx={{
-              color: '#00ffff',
+              color: '#00e5ff',
               '&:hover': {
-                color: '#33ffff',
+                color: '#6effff',
                 backgroundColor: 'rgba(0, 255, 255, 0.1)',
               },
             }}
@@ -348,8 +348,8 @@ export default function InventoryPage() {
         <Typography
           variant="h4"
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 20px #00e5ff, 0 0 40px #00e5ff',
             fontFamily: '"VT323", monospace',
             mb: 2,
             textAlign: 'center',
@@ -382,7 +382,7 @@ export default function InventoryPage() {
               <InputLabel
                 sx={{
                   color: '#cccccc',
-                  '&.Mui-focused': { color: '#00ffff' },
+                  '&.Mui-focused': { color: '#00e5ff' },
                 }}
               >
                 Status Filter
@@ -405,7 +405,7 @@ export default function InventoryPage() {
               <InputLabel
                 sx={{
                   color: '#cccccc',
-                  '&.Mui-focused': { color: '#00ffff' },
+                  '&.Mui-focused': { color: '#00e5ff' },
                 }}
               >
                 Category Filter
@@ -462,7 +462,7 @@ export default function InventoryPage() {
             border: 'none',
             '& .MuiDataGrid-columnHeaders': {
               backgroundColor: 'rgba(0, 17, 34, 0.9)',
-              borderBottom: '1px solid #00ffff',
+              borderBottom: '1px solid #00e5ff',
             },
             '& .MuiDataGrid-row:hover': {
               backgroundColor: 'rgba(0, 255, 255, 0.05)',

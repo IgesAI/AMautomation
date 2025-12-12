@@ -100,8 +100,8 @@ export default function Dashboard() {
         <Typography
           variant="h4"
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 10px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 10px #00e5ff',
             fontFamily: '"VT323", monospace',
             textAlign: 'center',
             mb: 4,
@@ -165,8 +165,8 @@ export default function Dashboard() {
         <Typography
           variant="h3"
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 20px #00e5ff, 0 0 40px #00e5ff',
             fontFamily: '"VT323", monospace',
             mb: 2,
             letterSpacing: '0.1em',
@@ -265,8 +265,8 @@ export default function Dashboard() {
         <Typography
           variant="h6"
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 15px #00e5ff, 0 0 30px #00e5ff',
             fontFamily: '"VT323", monospace',
             mb: 2,
           }}

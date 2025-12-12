@@ -3,13 +3,13 @@
 :root {
   --pip-green: #00ff00;
   --pip-bg: #0a0a0a;
-  --pip-cyan: #00ffff;
+  --pip-cyan: #00e5ff;
   --pip-magenta: #ff00ff;
   --pip-orange: #ffaa00;
   --pip-red: #ff4444;
   --terminal-bg: #0a0a0a;
-  --terminal-border: #00ffff;
-  --glow-cyan: rgba(0, 255, 255, 0.6);
+  --terminal-border: #00e5ff;
+  --glow-cyan: rgba(0, 229, 255, 0.5);
   --glow-magenta: rgba(255, 0, 255, 0.5);
   --card-bg: rgba(10, 10, 10, 0.95);
 }
@@ -122,7 +122,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #33ffff;
+  background: #6effff;
   box-shadow: 0 0 10px var(--glow-cyan);
 }
 

@@ -41,7 +41,7 @@ export function RecentActivity({ transactions }: RecentActivityProps) {
       case 'ADJUSTMENT':
         return '#ff00ff'
       default:
-        return '#00ffff'
+        return '#00e5ff'
     }
   }
 
@@ -69,8 +69,8 @@ export function RecentActivity({ transactions }: RecentActivityProps) {
       <Typography
         variant="h5"
         sx={{
-          color: '#00ffff',
-          textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff',
+          color: '#00e5ff',
+          textShadow: '0 0 15px #00e5ff, 0 0 30px #00e5ff',
           fontFamily: '"VT323", monospace',
           mb: 3,
           textAlign: 'center',
@@ -157,7 +157,7 @@ export function RecentActivity({ transactions }: RecentActivityProps) {
                         <Typography
                           component="span"
                           sx={{
-                            color: '#00ffff',
+                            color: '#00e5ff',
                             fontFamily: '"Share Tech Mono", monospace',
                             fontSize: '0.75rem',
                           }}

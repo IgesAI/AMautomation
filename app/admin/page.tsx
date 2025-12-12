@@ -509,8 +509,8 @@ export default function AdminPage() {
       <Container maxWidth="xl" sx={{ py: 4 }}>
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 10px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 10px #00e5ff',
             fontFamily: '"VT323", monospace',
             textAlign: 'center',
             fontSize: '1.5rem',
@@ -529,8 +529,8 @@ export default function AdminPage() {
           <Typography
             variant="h4"
             sx={{
-              color: '#00ffff',
-              textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff',
+              color: '#00e5ff',
+              textShadow: '0 0 20px #00e5ff, 0 0 40px #00e5ff',
               fontFamily: '"VT323", monospace',
               textAlign: 'center',
               mb: 4,
@@ -604,8 +604,8 @@ export default function AdminPage() {
         <Typography
           variant="h4"
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 20px #00e5ff, 0 0 40px #00e5ff',
             fontFamily: '"VT323", monospace',
           }}
         >
@@ -652,13 +652,13 @@ export default function AdminPage() {
                 fontFamily: '"Share Tech Mono", monospace',
                 minWidth: 120,
                 '&.Mui-selected': {
-                  color: '#00ffff',
-                  textShadow: '0 0 8px #00ffff',
+                  color: '#00e5ff',
+                  textShadow: '0 0 8px #00e5ff',
                 },
               },
               '& .MuiTabs-indicator': {
-                backgroundColor: '#00ffff',
-                boxShadow: '0 0 10px #00ffff',
+                backgroundColor: '#00e5ff',
+                boxShadow: '0 0 10px #00e5ff',
               },
             }}
           >
@@ -675,8 +675,8 @@ export default function AdminPage() {
             <Typography
               variant="h6"
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 15px #00e5ff, 0 0 30px #00e5ff',
                 fontFamily: '"VT323", monospace',
               }}
             >
@@ -714,8 +714,8 @@ export default function AdminPage() {
                     <TableCell
                       key={header}
                       sx={{
-                        color: '#00ffff',
-                        textShadow: '0 0 5px #00ffff',
+                        color: '#00e5ff',
+                        textShadow: '0 0 5px #00e5ff',
                         fontFamily: '"Share Tech Mono", monospace',
                         fontWeight: 'bold',
                         fontSize: '0.75rem',
@@ -759,8 +759,8 @@ export default function AdminPage() {
                             size="small"
                             sx={{
                               backgroundColor: 'rgba(0, 255, 255, 0.1)',
-                              color: '#00ffff',
-                              border: '1px solid #00ffff',
+                              color: '#00e5ff',
+                              border: '1px solid #00e5ff',
                               fontFamily: '"Share Tech Mono", monospace',
                               fontSize: '0.7rem',
                             }}
@@ -811,8 +811,8 @@ export default function AdminPage() {
             <Typography
               variant="h6"
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 15px #00e5ff, 0 0 30px #00e5ff',
                 fontFamily: '"VT323", monospace',
               }}
             >
@@ -831,8 +831,8 @@ export default function AdminPage() {
                     <TableCell
                       key={header}
                       sx={{
-                        color: '#00ffff',
-                        textShadow: '0 0 5px #00ffff',
+                        color: '#00e5ff',
+                        textShadow: '0 0 5px #00e5ff',
                         fontFamily: '"Share Tech Mono", monospace',
                         fontWeight: 'bold',
                       }}
@@ -917,7 +917,7 @@ export default function AdminPage() {
           sx: { backgroundColor: '#0a1929' },
         }}
       >
-        <DialogTitle sx={{ color: '#00ffff', textShadow: '0 0 10px #00ffff', fontFamily: '"VT323", monospace' }}>
+        <DialogTitle sx={{ color: '#00e5ff', textShadow: '0 0 10px #00e5ff', fontFamily: '"VT323", monospace' }}>
           {editingItem ? 'EDIT ITEM' : 'ADD NEW ITEM'}
         </DialogTitle>
         <DialogContent>
@@ -943,7 +943,7 @@ export default function AdminPage() {
               fullWidth
             />
             <FormControl fullWidth>
-              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00ffff' } }}>CATEGORY *</InputLabel>
+              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00e5ff' } }}>CATEGORY *</InputLabel>
               <Select
                 value={itemForm.categoryId}
                 label="CATEGORY *"
@@ -991,7 +991,7 @@ export default function AdminPage() {
               helperText="Ideal stock level to maintain"
             />
             <FormControl fullWidth>
-              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00ffff' } }}>LOCATION</InputLabel>
+              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00e5ff' } }}>LOCATION</InputLabel>
               <Select
                 value={itemForm.locationId}
                 label="LOCATION"
@@ -1005,7 +1005,7 @@ export default function AdminPage() {
               </Select>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00ffff' } }}>SUPPLIER</InputLabel>
+              <InputLabel sx={{ color: '#cccccc', '&.Mui-focused': { color: '#00e5ff' } }}>SUPPLIER</InputLabel>
               <Select
                 value={itemForm.supplierId}
                 label="SUPPLIER"
@@ -1068,7 +1068,7 @@ export default function AdminPage() {
           sx: { backgroundColor: '#0a1929' },
         }}
       >
-        <DialogTitle sx={{ color: '#00ffff', textShadow: '0 0 10px #00ffff', fontFamily: '"VT323", monospace' }}>
+        <DialogTitle sx={{ color: '#00e5ff', textShadow: '0 0 10px #00e5ff', fontFamily: '"VT323", monospace' }}>
           {editingCategory ? 'EDIT CATEGORY' : 'ADD CATEGORY'}
         </DialogTitle>
         <DialogContent>

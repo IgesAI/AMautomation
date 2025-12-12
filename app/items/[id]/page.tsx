@@ -146,8 +146,8 @@ export default function ItemDetailPage() {
       <Container maxWidth="xl" sx={{ py: 4 }}>
         <Typography
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 10px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 10px #00e5ff',
             fontFamily: '"VT323", monospace',
             textAlign: 'center',
             fontSize: '1.5rem',
@@ -192,8 +192,8 @@ export default function ItemDetailPage() {
           <Typography
             variant="h4"
             sx={{
-              color: '#00ffff',
-              textShadow: '0 0 15px #00ffff',
+              color: '#00e5ff',
+              textShadow: '0 0 15px #00e5ff',
               fontFamily: '"VT323", monospace',
             }}
           >
@@ -225,7 +225,7 @@ export default function ItemDetailPage() {
               sx={{
                 backgroundColor: 'rgba(0, 255, 255, 0.1)',
                 border: '1px solid #00cccc',
-                color: '#00ffff',
+                color: '#00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
               }}
             />
@@ -244,13 +244,13 @@ export default function ItemDetailPage() {
                 color: '#cccccc',
                 fontFamily: '"Share Tech Mono", monospace',
                 '&.Mui-selected': {
-                  color: '#00ffff',
-                  textShadow: '0 0 8px #00ffff',
+                  color: '#00e5ff',
+                  textShadow: '0 0 8px #00e5ff',
                 },
               },
               '& .MuiTabs-indicator': {
-                backgroundColor: '#00ffff',
-                boxShadow: '0 0 10px #00ffff',
+                backgroundColor: '#00e5ff',
+                boxShadow: '0 0 10px #00e5ff',
               },
             }}
           >
@@ -274,8 +274,8 @@ export default function ItemDetailPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    color: '#00ffff',
-                    textShadow: '0 0 8px #00ffff',
+                    color: '#00e5ff',
+                    textShadow: '0 0 8px #00e5ff',
                     fontFamily: '"VT323", monospace',
                     mb: 3,
                   }}
@@ -374,8 +374,8 @@ export default function ItemDetailPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    color: '#00ffff',
-                    textShadow: '0 0 8px #00ffff',
+                    color: '#00e5ff',
+                    textShadow: '0 0 8px #00e5ff',
                     fontFamily: '"VT323", monospace',
                     mb: 3,
                   }}
@@ -405,8 +405,8 @@ export default function ItemDetailPage() {
                 <TableRow>
                   <TableCell
                     sx={{
-                      color: '#00ffff',
-                      textShadow: '0 0 5px #00ffff',
+                      color: '#00e5ff',
+                      textShadow: '0 0 5px #00e5ff',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',
@@ -417,8 +417,8 @@ export default function ItemDetailPage() {
                   <TableCell
                     align="right"
                     sx={{
-                      color: '#00ffff',
-                      textShadow: '0 0 5px #00ffff',
+                      color: '#00e5ff',
+                      textShadow: '0 0 5px #00e5ff',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',
@@ -428,8 +428,8 @@ export default function ItemDetailPage() {
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: '#00ffff',
-                      textShadow: '0 0 5px #00ffff',
+                      color: '#00e5ff',
+                      textShadow: '0 0 5px #00e5ff',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',
@@ -439,8 +439,8 @@ export default function ItemDetailPage() {
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: '#00ffff',
-                      textShadow: '0 0 5px #00ffff',
+                      color: '#00e5ff',
+                      textShadow: '0 0 5px #00e5ff',
                       fontFamily: '"Share Tech Mono", monospace',
                       fontWeight: 'bold',
                       backgroundColor: 'rgba(0, 17, 34, 0.9)',

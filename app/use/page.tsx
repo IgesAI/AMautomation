@@ -178,8 +178,8 @@ export default function QuickUsagePage() {
         <Typography
           variant="h4"
           sx={{
-            color: '#00ffff',
-            textShadow: '0 0 15px #00ffff',
+            color: '#00e5ff',
+            textShadow: '0 0 15px #00e5ff',
             fontFamily: '"VT323", monospace',
             mb: 2,
           }}
@@ -253,10 +253,10 @@ export default function QuickUsagePage() {
               )}
               sx={{
                 '& .MuiAutocomplete-popupIndicator': {
-                  color: '#00ffff',
+                  color: '#00e5ff',
                 },
                 '& .MuiAutocomplete-clearIndicator': {
-                  color: '#00ffff',
+                  color: '#00e5ff',
                 },
               }}
             />
@@ -283,7 +283,7 @@ export default function QuickUsagePage() {
               <InputLabel
                 sx={{
                   color: '#cccccc',
-                  '&.Mui-focused': { color: '#00ffff' },
+                  '&.Mui-focused': { color: '#00e5ff' },
                 }}
               >
                 MACHINE/AREA

@@ -45,11 +45,11 @@ export function ItemTable({ items, onViewItem, onEditItem, showActions = true }:
           <TableRow>
             <TableCell
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
                 backgroundColor: 'rgba(0, 17, 34, 0.9)',
               }}
             >
@@ -57,22 +57,22 @@ export function ItemTable({ items, onViewItem, onEditItem, showActions = true }:
             </TableCell>
             <TableCell
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
               }}
             >
               SKU
             </TableCell>
             <TableCell
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
               }}
             >
               CATEGORY
@@ -80,11 +80,11 @@ export function ItemTable({ items, onViewItem, onEditItem, showActions = true }:
             <TableCell
               align="right"
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
               }}
             >
               CURRENT
@@ -92,44 +92,44 @@ export function ItemTable({ items, onViewItem, onEditItem, showActions = true }:
             <TableCell
               align="right"
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
               }}
             >
               MIN
             </TableCell>
             <TableCell
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
               }}
             >
               UNIT
             </TableCell>
             <TableCell
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
               }}
             >
               STATUS
             </TableCell>
             <TableCell
               sx={{
-                color: '#00ffff',
-                textShadow: '0 0 5px #00ffff',
+                color: '#00e5ff',
+                textShadow: '0 0 5px #00e5ff',
                 fontFamily: '"Share Tech Mono", monospace',
                 fontWeight: 'bold',
-                borderBottom: '1px solid #00ffff',
+                borderBottom: '1px solid #00e5ff',
               }}
             >
               LOCATION
@@ -138,11 +138,11 @@ export function ItemTable({ items, onViewItem, onEditItem, showActions = true }:
               <TableCell
                 align="center"
                 sx={{
-                  color: '#00ffff',
-                  textShadow: '0 0 5px #00ffff',
+                  color: '#00e5ff',
+                  textShadow: '0 0 5px #00e5ff',
                   fontFamily: '"Share Tech Mono", monospace',
                   fontWeight: 'bold',
-                  borderBottom: '1px solid #00ffff',
+                  borderBottom: '1px solid #00e5ff',
                 }}
               >
                 ACTIONS
@@ -240,9 +240,9 @@ export function ItemTable({ items, onViewItem, onEditItem, showActions = true }:
                         size="small"
                         onClick={() => onViewItem(item.id)}
                         sx={{
-                          color: '#00ffff',
+                          color: '#00e5ff',
                           '&:hover': {
-                            color: '#33ffff',
+                            color: '#6effff',
                             backgroundColor: 'rgba(0, 255, 255, 0.1)',
                           },
                         }}
