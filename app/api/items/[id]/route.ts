@@ -4,10 +4,11 @@ import { requireAdmin } from '@/lib/auth'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const item = await getItemWithStatus(params.id)
+    const { id } = await params
+    const item = await getItemWithStatus(id)
 
     if (!item) {
       return NextResponse.json(
@@ -31,9 +32,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+    
     // Require admin authentication
     const authError = await requireAdmin(request)
     if (authError) return authError
@@ -43,7 +46,7 @@ export async function PUT(
 
     // Check if item exists
     const existingItem = await prisma.consumableItem.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!existingItem) {
@@ -69,7 +72,7 @@ export async function PUT(
 
     // Update the item
     const updatedItem = await prisma.consumableItem.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         name: body.name,
         sku: body.sku,
@@ -110,9 +113,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+    
     // Require admin authentication
     const authError = await requireAdmin(request)
     if (authError) return authError
@@ -121,7 +126,7 @@ export async function DELETE(
 
     // Check if item exists
     const existingItem = await prisma.consumableItem.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!existingItem) {
@@ -133,7 +138,7 @@ export async function DELETE(
 
     // Soft delete by setting isActive to false
     await prisma.consumableItem.update({
-      where: { id: params.id },
+      where: { id },
       data: { isActive: false }
     })
 
