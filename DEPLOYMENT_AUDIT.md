@@ -18,6 +18,11 @@
 - ✅ Removed deprecated `item` prop from all Grid components
 - ✅ All Grid containers and items updated across 3 files
 
+### 3.1 **MUI X DataGrid v7 API Changes**
+- ✅ Fixed DataGrid `valueGetter` - now uses `(value, row) => row.field` instead of `(params) => params.row.field`
+- ✅ Updated 2 valueGetter functions in items page
+- ✅ renderCell functions remain compatible (use GridRenderCellParams)
+
 ### 4. **Prisma Decimal Type Handling**
 - ✅ Fixed Decimal comparisons in `lib/item-utils.ts` (converted to Number)
 - ✅ Fixed Decimal comparisons in `app/api/transactions/route.ts` (converted to Number)
