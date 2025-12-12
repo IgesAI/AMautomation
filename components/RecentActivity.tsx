@@ -9,9 +9,17 @@ import {
   Chip,
 } from '@mui/material'
 import { formatDistanceToNow } from 'date-fns'
-import { InventoryTransaction, ConsumableItem } from '@prisma/client'
-
-interface RecentTransaction extends InventoryTransaction {
+// Transaction data from API (dates are serialized as strings)
+interface RecentTransaction {
+  id: string
+  itemId: string
+  type: string
+  quantityChange: number
+  createdAt: string
+  performedBy?: string | null
+  machineOrArea?: string | null
+  jobReference?: string | null
+  notes?: string | null
   item: {
     name: string
     sku: string | null
