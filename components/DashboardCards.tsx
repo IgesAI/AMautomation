@@ -48,10 +48,10 @@ export function DashboardCards({ summary }: DashboardCardsProps) {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'flex-start',
-              background: 'linear-gradient(180deg, rgba(0, 17, 34, 0.95), rgba(0, 34, 51, 0.95))',
-              border: '1px solid #00cccc',
-              borderRadius: '4px',
-              boxShadow: '0 0 15px rgba(0, 255, 255, 0.2)',
+              background: 'rgba(10, 10, 10, 0.95)',
+              border: '1px solid #0099dd',
+              borderRadius: '8px',
+              boxShadow: '0 0 15px rgba(0, 153, 221, 0.3)',
             }}
           >
             <Typography
