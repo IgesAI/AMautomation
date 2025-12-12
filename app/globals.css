@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono:wght@400;700&display=swap');
+
+:root {
+  --pip-green: #00ff00;
+  --pip-bg: #000000;
+  --pip-cyan: #00ffff;
+  --pip-magenta: #ff00ff;
+  --pip-orange: #ffaa00;
+  --pip-red: #ff4444;
+  --terminal-bg: #000011;
+  --terminal-border: #00cccc;
+  --glow-cyan: rgba(0, 255, 255, 0.5);
+  --glow-magenta: rgba(255, 0, 255, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Share Tech Mono', 'VT323', monospace;
+  background-color: var(--terminal-bg);
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+/* CRT Scanlines Effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.03) 2px,
+    rgba(0, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Vignette Effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Flicker Animation */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.98; }
+  25%, 75% { opacity: 0.99; }
+}
+
+body {
+  animation: flicker 4s infinite;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pip-cyan);
+  border-radius: 4px;
+  box-shadow: 0 0 5px var(--glow-cyan);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #33ffff;
+  box-shadow: 0 0 10px var(--glow-cyan);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--terminal-bg);
+}
+
+/* Text Selection Glow */
+::selection {
+  background: rgba(0, 255, 255, 0.2);
+  text-shadow: 0 0 8px var(--pip-cyan);
+}
+
+/* Terminal Glow Effects */
+.terminal-glow {
+  text-shadow: 0 0 10px var(--pip-cyan);
+}
+
+.terminal-border {
+  border: 1px solid var(--terminal-border);
+  box-shadow: 0 0 10px var(--glow-cyan);
+}
+
+.terminal-card {
+  background: linear-gradient(135deg, rgba(0, 17, 34, 0.9), rgba(0, 34, 51, 0.9));
+  border: 1px solid var(--terminal-border);
+  border-radius: 4px;
+  box-shadow:
+    0 0 20px var(--glow-cyan),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.terminal-button {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 204, 204, 0.1));
+  border: 1px solid var(--terminal-border);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--glow-cyan);
+  transition: all 0.3s ease;
+}
+
+.terminal-button:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(51, 255, 255, 0.2));
+  box-shadow: 0 0 20px var(--glow-cyan);
+  transform: translateY(-1px);
+}
+
+.terminal-input {
+  background: rgba(0, 17, 34, 0.8);
+  border: 1px solid var(--terminal-border);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--glow-cyan);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.terminal-input:focus {
+  border-color: var(--pip-cyan);
+  box-shadow: 0 0 15px var(--glow-cyan);
+  outline: none;
+}
+
+/* Status Colors */
+.status-ok {
+  color: var(--pip-green);
+  text-shadow: 0 0 5px var(--pip-green);
+}
+
+.status-low {
+  color: var(--pip-orange);
+  text-shadow: 0 0 5px var(--pip-orange);
+}
+
+.status-out {
+  color: var(--pip-red);
+  text-shadow: 0 0 5px var(--pip-red);
+}
+
+.status-expiring {
+  color: var(--pip-magenta);
+  text-shadow: 0 0 5px var(--pip-magenta);
+}
+
+/* Data Grid Styling */
+.MuiDataGrid-root {
+  border: 1px solid var(--terminal-border);
+  border-radius: 4px;
+  box-shadow: 0 0 15px var(--glow-cyan);
+}
+
+.MuiDataGrid-columnHeaders {
+  background: linear-gradient(135deg, rgba(0, 17, 34, 0.9), rgba(0, 34, 51, 0.9));
+  border-bottom: 1px solid var(--terminal-border);
+}
+
+.MuiDataGrid-row:hover {
+  background: rgba(0, 255, 255, 0.05);
+  box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1);
+}
+
+.MuiDataGrid-cell {
+  border-bottom: 1px solid rgba(0, 204, 204, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  .terminal-card {
+    margin: 8px;
+    border-radius: 2px;
+  }
+}

@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TransactionType {
+  ADD_STOCK
+  CONSUME
+  ADJUSTMENT
+}
+
+enum NotificationType {
+  LOW_STOCK
+  OUT_OF_STOCK
+  EXPIRING_SOON
+}
+
+enum ItemStatus {
+  OK
+  LOW
+  OUT_OF_STOCK
+  EXPIRING_SOON
+}
+
+model ConsumableCategory {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  sortOrder   Int?
+  createdAt   DateTime @default(now()) @updatedAt
+  updatedAt   DateTime @updatedAt
+
+  items             ConsumableItem[]
+  notificationRules NotificationRule[]
+
+  @@map("consumable_categories")
+}
+
+model ConsumableItem {
+  id                  String      @id @default(uuid()) @db.Uuid
+  name                String
+  sku                 String?
+  categoryId          String     @db.Uuid
+  unitOfMeasure       String     @default("pcs")
+  currentQuantity     Decimal    @db.Decimal(15, 6)
+  minimumQuantity     Decimal    @db.Decimal(15, 6)
+  reorderQuantity     Decimal    @db.Decimal(15, 6)
+  locationId          String?    @db.Uuid
+  supplierId          String?    @db.Uuid
+  expirationDate      DateTime?
+  isActive            Boolean    @default(true)
+  lastNotifiedStatus  ItemStatus @default(OK)
+  notes               String?
+
+  createdAt DateTime @default(now()) @updatedAt
+  updatedAt DateTime @updatedAt
+
+  category   ConsumableCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  location   Location?          @relation(fields: [locationId], references: [id])
+  supplier   Supplier?          @relation(fields: [supplierId], references: [id])
+
+  transactions      InventoryTransaction[]
+  notificationRules NotificationRule[]
+  notificationLogs  NotificationLog[]
+
+  @@map("consumable_items")
+}
+
+model Location {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @updatedAt
+  updatedAt   DateTime @updatedAt
+
+  items ConsumableItem[]
+
+  @@map("locations")
+}
+
+model Supplier {
+  id                    String  @id @default(uuid()) @db.Uuid
+  name                  String
+  contactEmail          String?
+  phone                 String?
+  defaultLeadTimeDays   Int?
+  notes                 String?
+  createdAt             DateTime @default(now()) @updatedAt
+  updatedAt             DateTime @updatedAt
+
+  items ConsumableItem[]
+
+  @@map("suppliers")
+}
+
+model InventoryTransaction {
+  id               String          @id @default(uuid()) @db.Uuid
+  itemId           String          @db.Uuid
+  type             TransactionType
+  quantityChange   Decimal         @db.Decimal(15, 6)
+  performedBy      String?
+  machineOrArea    String?
+  jobReference     String?
+  notes            String?
+  createdAt        DateTime        @default(now())
+
+  item ConsumableItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@map("inventory_transactions")
+}
+
+model NotificationRule {
+  id                  String   @id @default(uuid()) @db.Uuid
+  itemId              String?  @db.Uuid
+  categoryId          String?  @db.Uuid
+  emails              String[] // Array of email recipients
+  notifyOnLowStock    Boolean  @default(true)
+  notifyOnOutOfStock  Boolean  @default(true)
+  notifyOnExpiringSoon Boolean @default(true)
+  expiringSoonDays    Int      @default(30)
+  isActive            Boolean  @default(true)
+  priority            Int      @default(0)
+  createdAt           DateTime @default(now()) @updatedAt
+  updatedAt           DateTime @updatedAt
+
+  item     ConsumableItem?    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  category ConsumableCategory? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("notification_rules")
+}
+
+model NotificationLog {
+  id               String           @id @default(uuid()) @db.Uuid
+  itemId           String           @db.Uuid
+  notificationType NotificationType
+  recipients       String[]
+  subject          String
+  body             String           @db.Text
+  sentAt           DateTime         @default(now())
+  meta             Json?
+
+  item ConsumableItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@map("notification_logs")
+}

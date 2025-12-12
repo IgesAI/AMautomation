@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://inventory:inventory_password@db:5432/am_inventory
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-super-secret-admin-password}
+      - JWT_SECRET=${JWT_SECRET:-your-jwt-secret-key-here-make-it-long-and-secure}
+      - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SMTP_FROM=${SMTP_FROM:-noreply@inventory.local}
+      - NOTIFY_DEFAULT_RECIPIENTS=${NOTIFY_DEFAULT_RECIPIENTS:-admin@company.com}
+    depends_on:
+      - db
+    volumes:
+      - ./prisma:/app/prisma
+    networks:
+      - inventory-network
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=am_inventory
+      - POSTGRES_USER=inventory
+      - POSTGRES_PASSWORD=inventory_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - inventory-network
+
+volumes:
+  postgres_data:
+
+networks:
+  inventory-network:
+    driver: bridge
