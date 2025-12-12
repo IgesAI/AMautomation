@@ -12,6 +12,7 @@
 - ✅ Fixed `ThemeRegistry` import - changed from named to default export
 - ✅ Created `ItemWithStatus` type that extends `ItemWithRelations` with status property
 - ✅ Updated all components and pages using items to use correct `ItemWithStatus` type
+- ✅ Fixed `DashboardSummary` type - added missing `itemId` and `notes` fields to recentTransactions
 
 ### 3. **MUI v7 Grid API Changes**
 - ✅ Fixed Grid responsive props - now use `size={{ xs: 12, md: 6 }}` instead of `xs={12} md={6}`
