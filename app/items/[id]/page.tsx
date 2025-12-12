@@ -25,6 +25,10 @@ import { format } from 'date-fns'
 import { ItemWithRelations } from '@/lib/item-utils'
 import { StatusBadge } from '@/components/StatusBadge'
 import { TransactionDialog, TransactionFormData } from '@/components/TransactionDialog'
+import { ItemStatus } from '@prisma/client'
+
+// Extended type that includes calculated status from API
+type ItemWithStatus = ItemWithRelations & { status: ItemStatus }
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -64,7 +68,7 @@ export default function ItemDetailPage() {
   const router = useRouter()
   const itemId = params.id as string
 
-  const [item, setItem] = useState<ItemWithRelations | null>(null)
+  const [item, setItem] = useState<ItemWithStatus | null>(null)
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
