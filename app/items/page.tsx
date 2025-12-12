@@ -133,7 +133,7 @@ export default function InventoryPage() {
       field: 'category',
       headerName: 'CATEGORY',
       width: 150,
-      valueGetter: (params) => params.row.category.name,
+      valueGetter: (value, row) => row.category.name,
       renderHeader: (params) => (
         <Typography
           sx={{
@@ -278,7 +278,7 @@ export default function InventoryPage() {
       field: 'location',
       headerName: 'LOCATION',
       width: 150,
-      valueGetter: (params) => params.row.location?.name || '-',
+      valueGetter: (value, row) => row.location?.name || '-',
       renderHeader: (params) => (
         <Typography
           sx={{
