@@ -242,21 +242,124 @@ export async function checkAllItemsForExpiringSoon() {
 }
 
 export async function checkAllItemsForLowStock() {
-  // Find items that are low stock but not yet marked as such
-  const lowStockItems = await prisma.consumableItem.findMany({
+  // Find all active items and check if they're low stock
+  const allItems = await prisma.consumableItem.findMany({
     where: {
       isActive: true,
-      currentQuantity: {
-        gt: 0,
-        lte: prisma.consumableItem.fields.minimumQuantity,
-      },
       lastNotifiedStatus: {
         not: ItemStatus.LOW,
       },
     },
   })
 
+  // Filter items where currentQuantity > 0 AND currentQuantity <= minimumQuantity
+  const lowStockItems = allItems.filter(item => {
+    const current = Number(item.currentQuantity)
+    const minimum = Number(item.minimumQuantity)
+    return current > 0 && current <= minimum
+  })
+
   for (const item of lowStockItems) {
     await processItemNotifications(item)
+  }
+}
+
+// Send a test notification email
+export async function sendTestNotification(recipientEmail: string): Promise<{ success: boolean; message: string }> {
+  try {
+    const { sendEmail } = await import('./email')
+    
+    const testHtml = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+          }
+          .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #0099dd;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 153, 221, 0.3);
+            padding: 20px;
+          }
+          .header {
+            text-align: center;
+            border-bottom: 1px solid #0099dd;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+          }
+          h1 {
+            color: #0099dd;
+            text-shadow: 0 0 10px #0099dd;
+            margin: 0;
+            font-size: 24px;
+          }
+          .success {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0;
+          }
+          .info {
+            color: #cccccc;
+            font-size: 14px;
+            text-align: center;
+          }
+          .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #0099dd;
+            color: #666666;
+            font-size: 12px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>AM INVENTORY SYSTEM</h1>
+          </div>
+          <div class="success">✓ EMAIL TEST SUCCESSFUL</div>
+          <div class="info">
+            <p>This is a test email from your AM Consumables Inventory System.</p>
+            <p>If you're receiving this, your email notifications are configured correctly!</p>
+          </div>
+          <div class="footer">
+            Sent from: ${process.env.SMTP_FROM || 'noreply@inventory.local'}<br>
+            Time: ${new Date().toISOString()}
+          </div>
+        </div>
+      </body>
+      </html>
+    `
+
+    const success = await sendEmail(
+      [recipientEmail],
+      '[AM Inventory] Test Notification - Email System Working',
+      testHtml
+    )
+
+    if (success) {
+      return { success: true, message: `Test email sent successfully to ${recipientEmail}` }
+    } else {
+      return { success: false, message: 'Email sending failed. Check SMTP configuration.' }
+    }
+  } catch (error) {
+    console.error('Test notification error:', error)
+    return { 
+      success: false, 
+      message: `Error: ${error instanceof Error ? error.message : 'Unknown error'}` 
+    }
   }
 }

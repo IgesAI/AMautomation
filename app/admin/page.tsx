@@ -172,6 +172,12 @@ export default function AdminPage() {
   const [supplierForm, setSupplierForm] = useState({ name: '', contactEmail: '', phone: '', notes: '' })
   const [supplierSaving, setSupplierSaving] = useState(false)
 
+  // Notification states
+  const [testEmail, setTestEmail] = useState('')
+  const [testingSending, setTestingSending] = useState(false)
+  const [notificationStatus, setNotificationStatus] = useState<any>(null)
+  const [notificationStatusLoading, setNotificationStatusLoading] = useState(false)
+
   // Delete confirmation
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [deleteTarget, setDeleteTarget] = useState<{ type: string; id: string; name: string } | null>(null)
@@ -485,6 +491,63 @@ export default function AdminPage() {
       console.error('Failed to save category:', error)
     } finally {
       setCategorySaving(false)
+    }
+  }
+
+  // Notification handlers
+  const fetchNotificationStatus = async () => {
+    setNotificationStatusLoading(true)
+    try {
+      const response = await fetch('/api/notifications/status')
+      if (response.ok) {
+        const data = await response.json()
+        setNotificationStatus(data.data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch notification status:', error)
+    } finally {
+      setNotificationStatusLoading(false)
+    }
+  }
+
+  const sendTestEmail = async () => {
+    if (!testEmail || !testEmail.includes('@')) {
+      setSuccessMessage('')
+      return
+    }
+    setTestingSending(true)
+    try {
+      const response = await fetch('/api/notifications/test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: testEmail }),
+      })
+      const data = await response.json()
+      if (data.success) {
+        setSuccessMessage(`Test email sent to ${testEmail}!`)
+      } else {
+        setSuccessMessage(`Failed: ${data.error || data.message}`)
+      }
+      setTimeout(() => setSuccessMessage(''), 5000)
+    } catch (error) {
+      console.error('Test email failed:', error)
+      setSuccessMessage('Failed to send test email')
+      setTimeout(() => setSuccessMessage(''), 3000)
+    } finally {
+      setTestingSending(false)
+    }
+  }
+
+  const runNotificationCheck = async () => {
+    try {
+      const response = await fetch('/api/notifications/check', {
+        method: 'POST',
+      })
+      const data = await response.json()
+      setSuccessMessage(data.message || 'Notification check completed')
+      setTimeout(() => setSuccessMessage(''), 5000)
+    } catch (error) {
+      console.error('Notification check failed:', error)
     }
   }
 
@@ -809,6 +872,7 @@ export default function AdminPage() {
             <Tab label="CATEGORIES" />
             <Tab label="LOCATIONS" />
             <Tab label="SUPPLIERS" />
+            <Tab label="NOTIFICATIONS" />
           </Tabs>
         </Box>
 
@@ -1189,6 +1253,180 @@ export default function AdminPage() {
               </TableBody>
             </Table>
           </TableContainer>
+        </TabPanel>
+
+        {/* NOTIFICATIONS TAB */}
+        <TabPanel value={tabValue} index={4}>
+          <Box sx={{ mb: 3 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#0099dd',
+                textShadow: '0 0 15px #0099dd, 0 0 30px #0099dd',
+                fontFamily: '"VT323", monospace',
+                mb: 3,
+              }}
+            >
+              {'>'} Email Notification Settings
+            </Typography>
+
+            {/* SMTP Status */}
+            <Paper className="terminal-card" sx={{ p: 3, mb: 3 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                <Typography sx={{ color: '#0099dd', fontFamily: '"VT323", monospace', fontSize: '1.2rem' }}>
+                  SMTP Configuration
+                </Typography>
+                <Button
+                  onClick={fetchNotificationStatus}
+                  className="terminal-button"
+                  size="small"
+                  disabled={notificationStatusLoading}
+                >
+                  {notificationStatusLoading ? 'CHECKING...' : 'CHECK STATUS'}
+                </Button>
+              </Box>
+              
+              {notificationStatus ? (
+                <Box>
+                  <Box sx={{ display: 'flex', gap: 2, mb: 2, flexWrap: 'wrap' }}>
+                    <Chip
+                      label={notificationStatus.smtpConfigured ? 'SMTP CONFIGURED' : 'SMTP NOT CONFIGURED'}
+                      sx={{
+                        backgroundColor: notificationStatus.smtpConfigured ? 'rgba(0, 255, 0, 0.1)' : 'rgba(255, 68, 68, 0.1)',
+                        color: notificationStatus.smtpConfigured ? '#00ff00' : '#ff4444',
+                        border: `1px solid ${notificationStatus.smtpConfigured ? '#00ff00' : '#ff4444'}`,
+                        fontFamily: '"Share Tech Mono", monospace',
+                      }}
+                    />
+                    <Chip
+                      label={`${notificationStatus.activeRulesCount} Active Rules`}
+                      sx={{
+                        backgroundColor: 'rgba(0, 153, 221, 0.1)',
+                        color: '#0099dd',
+                        border: '1px solid #0099dd',
+                        fontFamily: '"Share Tech Mono", monospace',
+                      }}
+                    />
+                  </Box>
+                  {notificationStatus.smtpHost && (
+                    <Typography sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.85rem' }}>
+                      Host: {notificationStatus.smtpHost} | From: {notificationStatus.smtpFrom || 'Not set'}
+                    </Typography>
+                  )}
+                  {notificationStatus.defaultRecipients?.length > 0 && (
+                    <Typography sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.85rem', mt: 1 }}>
+                      Default Recipients: {notificationStatus.defaultRecipients.join(', ')}
+                    </Typography>
+                  )}
+                </Box>
+              ) : (
+                <Typography sx={{ color: '#666', fontFamily: '"Share Tech Mono", monospace' }}>
+                  Click "CHECK STATUS" to view configuration
+                </Typography>
+              )}
+            </Paper>
+
+            {/* Test Email */}
+            <Paper className="terminal-card" sx={{ p: 3, mb: 3 }}>
+              <Typography sx={{ color: '#0099dd', fontFamily: '"VT323", monospace', fontSize: '1.2rem', mb: 2 }}>
+                Send Test Email
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+                <TextField
+                  label="Recipient Email"
+                  value={testEmail}
+                  onChange={(e) => setTestEmail(e.target.value)}
+                  className="terminal-input"
+                  size="small"
+                  sx={{ flex: 1 }}
+                  placeholder="your@email.com"
+                />
+                <Button
+                  onClick={sendTestEmail}
+                  className="terminal-button"
+                  disabled={testingSending || !testEmail}
+                >
+                  {testingSending ? 'SENDING...' : 'SEND TEST'}
+                </Button>
+              </Box>
+            </Paper>
+
+            {/* Manual Check */}
+            <Paper className="terminal-card" sx={{ p: 3, mb: 3 }}>
+              <Typography sx={{ color: '#0099dd', fontFamily: '"VT323", monospace', fontSize: '1.2rem', mb: 2 }}>
+                Manual Notification Check
+              </Typography>
+              <Typography sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.85rem', mb: 2 }}>
+                Run a manual check for low stock and expiring items. This will send notifications for any items that have changed status.
+              </Typography>
+              <Button onClick={runNotificationCheck} className="terminal-button">
+                RUN NOTIFICATION CHECK
+              </Button>
+            </Paper>
+
+            {/* Recent Notification Logs */}
+            {notificationStatus?.recentLogs?.length > 0 && (
+              <Paper className="terminal-card" sx={{ p: 3 }}>
+                <Typography sx={{ color: '#0099dd', fontFamily: '"VT323", monospace', fontSize: '1.2rem', mb: 2 }}>
+                  Recent Notification Logs
+                </Typography>
+                <TableContainer>
+                  <Table size="small">
+                    <TableHead>
+                      <TableRow>
+                        {['ITEM', 'TYPE', 'RECIPIENTS', 'SENT', 'STATUS'].map((h) => (
+                          <TableCell key={h} sx={{ color: '#0099dd', fontFamily: '"Share Tech Mono", monospace', fontWeight: 'bold', fontSize: '0.75rem' }}>
+                            {h}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {notificationStatus.recentLogs.map((log: any) => (
+                        <TableRow key={log.id}>
+                          <TableCell sx={{ color: '#fff', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.8rem' }}>
+                            {log.itemName}
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={log.type}
+                              size="small"
+                              sx={{
+                                backgroundColor: log.type === 'OUT_OF_STOCK' ? 'rgba(255, 68, 68, 0.2)' : 
+                                                 log.type === 'LOW_STOCK' ? 'rgba(255, 170, 0, 0.2)' : 'rgba(255, 0, 255, 0.2)',
+                                color: log.type === 'OUT_OF_STOCK' ? '#ff4444' : 
+                                       log.type === 'LOW_STOCK' ? '#ffaa00' : '#ff00ff',
+                                fontFamily: '"Share Tech Mono", monospace',
+                                fontSize: '0.65rem',
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell sx={{ color: '#ccc', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.75rem' }}>
+                            {log.recipients?.join(', ') || '-'}
+                          </TableCell>
+                          <TableCell sx={{ color: '#666', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.7rem' }}>
+                            {new Date(log.sentAt).toLocaleString()}
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={(log.meta as any)?.emailSent ? 'SENT' : 'FAILED'}
+                              size="small"
+                              sx={{
+                                backgroundColor: (log.meta as any)?.emailSent ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 68, 68, 0.2)',
+                                color: (log.meta as any)?.emailSent ? '#00ff00' : '#ff4444',
+                                fontFamily: '"Share Tech Mono", monospace',
+                                fontSize: '0.65rem',
+                              }}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            )}
+          </Box>
         </TabPanel>
       </Paper>
 
