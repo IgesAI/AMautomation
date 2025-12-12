@@ -140,7 +140,7 @@ async function sendNotificationToRecipients(
     if (!itemWithDetails) return
 
     // Get recent transactions for context
-    const recentTransactions = await prisma.inventoryTransaction.findMany({
+    const recentTransactionsRaw = await prisma.inventoryTransaction.findMany({
       where: { itemId: item.id },
       orderBy: { createdAt: 'desc' },
       take: 5,
@@ -153,6 +153,16 @@ async function sendNotificationToRecipients(
         jobReference: true,
       },
     })
+
+    // Convert Prisma types to plain types for email function
+    const recentTransactions = recentTransactionsRaw.map(tx => ({
+      type: tx.type as string,
+      quantityChange: Number(tx.quantityChange),
+      createdAt: tx.createdAt,
+      performedBy: tx.performedBy,
+      machineOrArea: tx.machineOrArea,
+      jobReference: tx.jobReference,
+    }))
 
     // Generate email content
     const { subject, html } = generateNotificationEmail(
