@@ -263,7 +263,7 @@ export default function ItemDetailPage() {
         {/* Details Tab */}
         <TabPanel value={tabValue} index={0}>
           <Grid container spacing={3}>
-            <Grid xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Paper
                 className="terminal-card"
                 sx={{
@@ -363,7 +363,7 @@ export default function ItemDetailPage() {
               </Paper>
             </Grid>
 
-            <Grid xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Paper
                 className="terminal-card"
                 sx={{

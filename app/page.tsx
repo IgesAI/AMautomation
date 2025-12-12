@@ -193,7 +193,7 @@ export default function Dashboard() {
 
       <Grid container spacing={4}>
         {/* Critical Items Table */}
-        <Grid xs={12} lg={8}>
+        <Grid size={{ xs: 12, lg: 8 }}>
           <Paper
             className="terminal-card"
             sx={{
@@ -253,7 +253,7 @@ export default function Dashboard() {
         </Grid>
 
         {/* Recent Activity */}
-        <Grid xs={12} lg={4}>
+        <Grid size={{ xs: 12, lg: 4 }}>
           {summary && <RecentActivity transactions={summary.recentTransactions} />}
         </Grid>
       </Grid>
