@@ -1359,9 +1359,45 @@ export default function AdminPage() {
               <Typography sx={{ color: '#cccccc', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.85rem', mb: 2 }}>
                 Run a manual check for low stock and expiring items. This will send notifications for any items that have changed status.
               </Typography>
-              <Button onClick={runNotificationCheck} className="terminal-button">
-                RUN NOTIFICATION CHECK
-              </Button>
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                <Button onClick={runNotificationCheck} className="terminal-button">
+                  RUN NOTIFICATION CHECK
+                </Button>
+                <Button 
+                  onClick={async () => {
+                    try {
+                      const response = await fetch('/api/notifications/check', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ forceSend: true }),
+                      })
+                      const data = await response.json()
+                      setSuccessMessage(data.message || `Force notification check completed. Sent ${data.sentCount || 0} notification(s).`)
+                      setTimeout(() => setSuccessMessage(''), 5000)
+                      fetchNotificationStatus() // Refresh status
+                    } catch (error) {
+                      console.error('Force notification check failed:', error)
+                      setSuccessMessage('Failed to run force notification check')
+                      setTimeout(() => setSuccessMessage(''), 3000)
+                    }
+                  }}
+                  className="terminal-button"
+                  sx={{ 
+                    backgroundColor: 'rgba(255, 170, 0, 0.1)',
+                    borderColor: '#ffaa00',
+                    color: '#ffaa00',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 170, 0, 0.2)',
+                      borderColor: '#ffcc00',
+                    }
+                  }}
+                >
+                  FORCE SEND (RESEND ALL LOW/OOS)
+                </Button>
+              </Box>
+              <Typography sx={{ color: '#888', fontFamily: '"Share Tech Mono", monospace', fontSize: '0.75rem', mt: 2 }}>
+                Force Send: Sends notifications for all items currently in low/out-of-stock state, even if already notified. Useful when updating notification emails.
+              </Typography>
             </Paper>
 
             {/* Recent Notification Logs */}

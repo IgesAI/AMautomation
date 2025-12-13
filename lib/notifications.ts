@@ -264,6 +264,52 @@ export async function checkAllItemsForLowStock() {
   }
 }
 
+// Force send notifications for items currently in low/out-of-stock state
+// Useful when updating notification emails or wanting to resend notifications
+export async function forceSendNotificationsForCurrentStatus(forceLowStock: boolean = true, forceOutOfStock: boolean = true) {
+  const allItems = await prisma.consumableItem.findMany({
+    where: {
+      isActive: true,
+    },
+  })
+
+  const { calculateItemStatus } = await import('./item-utils')
+  let sentCount = 0
+
+  for (const item of allItems) {
+    const currentStatus = calculateItemStatus(item)
+    const currentQty = Number(item.currentQuantity)
+    const minimumQty = Number(item.minimumQuantity)
+
+    // Determine what notification to send based on current status
+    let notificationType: NotificationType | null = null
+    
+    if (currentStatus === ItemStatus.OUT_OF_STOCK && forceOutOfStock && currentQty === 0) {
+      notificationType = NotificationType.OUT_OF_STOCK
+    } else if (currentStatus === ItemStatus.LOW && forceLowStock && currentQty > 0 && currentQty <= minimumQty) {
+      notificationType = NotificationType.LOW_STOCK
+    }
+
+    if (notificationType) {
+      // Get applicable notification rules
+      const rules = await getApplicableNotificationRules(item)
+      
+      // Send notification without checking lastNotifiedStatus
+      await sendNotificationForType(item, notificationType, rules)
+      
+      // Update the last notified status to prevent duplicate sends
+      await prisma.consumableItem.update({
+        where: { id: item.id },
+        data: { lastNotifiedStatus: currentStatus },
+      })
+      
+      sentCount++
+    }
+  }
+
+  return sentCount
+}
+
 // Send a test notification email
 export async function sendTestNotification(recipientEmail: string): Promise<{ success: boolean; message: string }> {
   try {
